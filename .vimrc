@@ -74,6 +74,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'honza/vim-snippets'
 Plugin 'garbas/vim-snipmate'
 " Git/mercurial/others diff icons on the side of the file lines
+" 同时支持Git 和 Svn ，速度也是相当不错的，高亮当前修改.　比较全面的一个插件
 Plugin 'mhinz/vim-signify'
 " Automatically sort python imports
 "Plugin 'fisadev/vim-isort'
@@ -92,7 +93,7 @@ Bundle 'omnicppcomplete'
 Plugin 'scrooloose/syntastic'
 " Golang Plugins
 Plugin 'fatih/vim-go'
-" Markdown syntastic highlight
+" 代码对齐插件
 Plugin 'godlygeek/tabular'
 
 " Search results counter
@@ -311,12 +312,12 @@ command! -nargs=1 RecurGrep lvimgrep /<args>/gj ./**/*.* | lopen | set nowrap
 command! -nargs=1 RecurGrepFast silent exec 'lgrep! <q-args> ./**/*.*' | lopen
 " mappings to call them
 " 全文查找
-nmap ,R :RecurGrep 
+"nmap ,R :RecurGrep 
 " 快速查找
-nmap ,r :RecurGrepFast 
+"nmap ,r :RecurGrepFast 
 " mappings to call them with the default word as search text
-nmap ,wR :RecurGrep <cword><CR>
-nmap ,wr :RecurGrepFast <cword><CR>
+"nmap ,wR :RecurGrep <cword><CR>
+"nmap ,wr :RecurGrepFast <cword><CR>
 
 " use 256 colors when possible
 " if &term =~? 'mlterm\|xterm\|xterm-256\|screen-256'
@@ -396,33 +397,33 @@ map <F2> :A<CR>
 
 " CtrlP ------------------------------
 " file finder mapping
-let g:ctrlp_map = ',e'
+let g:ctrlp_map = ',p'
 " hidden some types files
 let g:ctrlp_show_hidden = 1
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif           "Linux
 " tags (symbols) in current file finder mapping
-nmap ,g :CtrlPBufTag<CR>
+nmap ,pg :CtrlPBufTag<CR>
 " tags (symbols) in all files finder mapping
-nmap ,G :CtrlPBufTagAll<CR>
+nmap ,pG :CtrlPBufTagAll<CR>
 " general code finder in all files mapping
-nmap ,f :CtrlPLine<CR>
+nmap ,pf :CtrlPLine<CR>
 " recent files finder mapping
-nmap ,m :CtrlPMRUFiles<CR>
+nmap ,pm :CtrlPMRUFiles<CR>
 " commands finder mapping
-nmap ,c :CtrlPCmdPalette<CR>
+nmap ,pc :CtrlPCmdPalette<CR>
 " to be able to call CtrlP with default search text
 function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     execute ':CtrlP' . a:ctrlp_command_end
     call feedkeys(a:search_text)
 endfunction
 " same as previous mappings, but calling with current word as default text
-nmap ,wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
-nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
-nmap ,wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
-nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
-nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
-nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
+nmap ,wpg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
+nmap ,wpG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
+nmap ,wpf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
+nmap ,wpe :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
+nmap ,wpaf :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
+nmap ,wpm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
+nmap ,wpc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 " don't change working directory
 let g:ctrlp_working_path_mode = 0
 " ignore these files and folders on file finder
@@ -585,8 +586,8 @@ let g:choosewin_overlay_enable = 1
 
 " Airline ------------------------------
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'luna'
-"let g:airline_theme = 'bubblegum'
+"let g:airline_theme = 'luna'
+let g:airline_theme = 'bubblegum'
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -695,6 +696,7 @@ endif
 :set path+=$VIMPROJECT/vimlib/linux/include/sys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:mapleader = ","
 
 function Do_CsTag()
     let dir = getcwd()
