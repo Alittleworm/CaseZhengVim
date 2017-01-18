@@ -165,7 +165,7 @@
   " == Text Selection ==
   " character under the cursor
   hi Cursor           guifg=bg                guibg=#a3e3ed
-  hi Cursor           ctermfg=bg              ctermbg=153
+  hi Cursor           ctermfg=234             ctermbg=153
   " like cursor, but used when in IME mode
   hi CursorIM         guifg=bg                guibg=#96cdcd
   hi CursorIM         ctermfg=bg              ctermbg=116

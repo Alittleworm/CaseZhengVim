@@ -108,6 +108,8 @@ Plugin 'tomasr/molokai'
 " solarized colorscheme
 Plugin 'altercation/vim-colors-solarized'
 
+" 显示终端的各种颜色对应的编号
+Plugin 'guns/xterm-color-table.vim'
 
 " ============================================================================
 " Install plugins the first time vim runs  在安装Vundle后只运行一次
@@ -150,7 +152,7 @@ set shiftwidth=4
 
 " highlight cursor line and column 开启光亮光标行 开启高亮光标列
 set cursorline
-"hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 "set cursorcolumn
 "hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 
@@ -375,6 +377,7 @@ endif
 map <F4> :TagbarToggle<CR>
 " autofocus on tagbar open
 let g:tagbar_autofocus = 1
+let g:tagbar_width = 35
 
 
 " NERDTree ----------------------------- 
@@ -565,7 +568,7 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 " Window Chooser ------------------------------
 " mapping
-nmap  -  <Plug>(choosewin)
+nmap  (  <Plug>(choosewin)
 " show big letters
 let g:choosewin_overlay_enable = 1
 "Default keymapings in choosewin mode
@@ -748,3 +751,31 @@ endfunction
 map <F12> :call Do_CsTag()<CR><CR>
 
 filetype  on
+
+"用来改变终端下光标颜色
+let color_normal = 'HotPink'
+let color_insert = 'RoyalBlue1'
+let color_exit = 'green'
+if &term =~ 'xterm\|rxvt'
+    exe 'silent !echo -ne "\e]12;"' . shellescape(color_normal, 1) . '"\007"'
+    let &t_SI="\e]12;" . color_insert . "\007"
+    let &t_EI="\e]12;" . color_normal . "\007"
+    exe 'autocmd VimLeave * :!echo -ne "\e]12;"' . shellescape(color_exit, 1) . '"\007"'
+elseif &term =~ "screen"
+    if !exists('$SUDO_UID')
+        if exists('$TMUX')
+            exe 'silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
+            let &t_SI="\033Ptmux;\033\e]12;" . color_insert . "\007\033\\"
+            let &t_EI="\033Ptmux;\033\e]12;" . color_normal . "\007\033\\"
+            exe 'autocmd VimLeave * :!echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
+        else
+            exe 'silent !echo -ne "\033P\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
+            let &t_SI="\033P\e]12;" . color_insert . "\007\033\\"
+            let &t_EI="\033P\e]12;" . color_normal . "\007\033\\"
+            exe 'autocmd VimLeave * :!echo -ne "\033P\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
+        endif
+    endif
+endif
+unlet color_normal
+unlet color_insert
+unlet color_exit
