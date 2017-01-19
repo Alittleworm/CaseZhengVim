@@ -152,9 +152,9 @@ set shiftwidth=4
 
 " highlight cursor line and column 开启光亮光标行 开启高亮光标列
 set cursorline
-hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-"set cursorcolumn
-"hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+"hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=163 guibg=darkred guifg=white
+set cursorcolumn
+"hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=163 guibg=darkred guifg=white
 
 set novisualbell    " 不要闪烁(不明白)
 
@@ -210,8 +210,8 @@ set matchtime=1
 set scrolloff=3
 
 " 用浅色高亮当前行  
-autocmd InsertLeave * se nocul
-autocmd InsertEnter * se cul
+"autocmd InsertLeave * se nocul
+"autocmd InsertEnter * se cul
 
 " make backspace work like most other apps 设置退格键可用
 set backspace=2
@@ -259,8 +259,16 @@ autocmd FileType lua nmap <F5> :w !lua<cr><cr>
 set showmatch
 " 允许折叠  
 set foldenable
-" 手动折叠 
-set foldmethod=manual
+"折叠方式
+"manual           手工定义折叠
+"indent             更多的缩进表示更高级别的折叠
+"expr                用表达式来定义折叠
+"syntax             用语法高亮来定义折叠
+"diff                  对没有更改的文本进行折叠
+"marker            对文中的标志折叠
+set foldmethod=indent
+"设置折叠级别 0是最高级 数值越大折叠级别越低 这样不会每次打开都折叠了
+set foldlevel=9999
 
 " 命令行设置
 " 命令行显示输入的命令
@@ -387,7 +395,20 @@ map <F3> :NERDTreeToggle<CR>
 nmap ,t :NERDTreeFind<CR>
 " don;t show these file types  过滤文件和文件夹的显示
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$']
-
+" 设置宽度
+let NERDTreeWinSize=35
+" 排序
+let NERDTreeCaseSensitiveSort=1
+"let NERDTreeBookmarksFile=       "指定书签文件
+let NERDTreeHighlightCursorline=1       "高亮显示光标所在行
+"let NERDTreeMouseMode=2                 "指定鼠标模式（1.双击打开；2.单目录双文件；3.单击打开）
+"let NERDTreeShowBookmarks=1             "当打开 NERDTree 窗口时，自动显示 Bookmarks
+" 默认显示文件
+let NERDTreeShowFiles=1
+"let NERDTreeShowHidden=1                "默认显示隐藏文件
+"let NERDTreeShowLineNumbers=1           "默认显示行号
+"let NERDTreeWinPos='right'              "将 NERDTree 的窗口设置在 vim 窗口的右侧，默认在左
+let NERDChristmasTree=1                 "让树更好看
 
 " Tasklist ------------------------------
 " show pending tasks list
@@ -498,23 +519,23 @@ let g:syntastic_enable_balloons = 1 "whether to show balloons
 let g:acp_enableAtStartup = 0
 " Use neocomplcache.
 " 在系统启动的时候启动neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_ignore_case = 1
+"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_ignore_case = 1
 " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_enable_smart_case = 1
 " 提示的时候默认选择地一个，如果你设置为0，每次输入都需要用上下键选择
 let g:neocomplcache_enable_auto_select = 1
 " 设置NeoComplCache不自动弹出补全列表
 let g:NeoComplCache_DisableAutoComplete = 1
-let g:neocomplcache_enable_fuzzy_completion = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_fuzzy_completion_start_length = 1
-let g:neocomplcache_auto_completion_start_length = 1
-let g:neocomplcache_manual_completion_start_length = 1
+"let g:neocomplcache_enable_fuzzy_completion = 1
+"let g:neocomplcache_enable_camel_case_completion = 1
+"let g:neocomplcache_enable_underbar_completion = 1
+"let g:neocomplcache_fuzzy_completion_start_length = 1
+"let g:neocomplcache_auto_completion_start_length = 1
+"let g:neocomplcache_manual_completion_start_length = 1
 " Set minimum syntax keyword length.
-let g:neocomplcache_min_keyword_length = 1
-let g:neocomplcache_min_syntax_length = 2
+let g:neocomplcache_min_keyword_length = 3
+let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " complete with workds from any opened file
 let g:neocomplcache_same_filetype_lists = {}
@@ -672,7 +693,7 @@ let g:OmniCpp_ShowAccess = 1
 let g:OmniCpp_DisplayMode = 0
 " 选项用来控制匹配项所在域的显示位置。缺省情况下，omni显示的补全提示菜单中总是将匹配项所在域信息显示在
 " 缩略信息最后一列。 0 : 信息缩略中不显示匹配项所在域(缺省) 1 : 显示匹配项所在域，并移除缩略信息中最后一列
-let OmniCpp_ShowScopeInAbbr = 0
+let OmniCpp_ShowScopeInAbbr = 1
 " 显示补全提示缩略信息中显示函数原型。0 : 不显示(缺省) 1 : 显示原型
 let g:OmniCpp_ShowPrototypeInAbbr = 1
 " 在'.'号后自动运行omnicppcomplete给出提示信息。0/1, 缺省为1

@@ -165,16 +165,16 @@
   " == Text Selection ==
   " character under the cursor
   hi Cursor           guifg=bg                guibg=#a3e3ed
-  hi Cursor           ctermfg=234             ctermbg=153
+  hi Cursor           ctermfg=255             ctermbg=153
   " like cursor, but used when in IME mode
   hi CursorIM         guifg=bg                guibg=#96cdcd
-  hi CursorIM         ctermfg=bg              ctermbg=116
+  hi CursorIM         ctermfg=NONE              ctermbg=116
   " cursor column
   hi CursorColumn     guifg=NONE              guibg=#404448           gui=none
-  hi CursorColumn     ctermfg=NONE            ctermbg=236             cterm=none
+  hi CursorColumn     ctermfg=NONE            ctermbg=238             cterm=none
   " cursor line/row
   hi CursorLine       gui=NONE                guibg=#404448           gui=none
-  hi CursorLine       cterm=NONE              ctermbg=236             cterm=none
+  hi CursorLine       cterm=NONE              ctermbg=238             cterm=none
   " visual mode selection
   hi Visual           guifg=NONE              guibg=#364458
   hi Visual           ctermfg=NONE            ctermbg=24
