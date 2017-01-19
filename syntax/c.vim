@@ -488,18 +488,48 @@ syn match   cFunction "\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
 hi cFunction        gui=NONE guifg=#B73838 ctermfg=196
 
 " operation
-syntax match operation display " [?:+=\-\*/&|~%^] "
-syntax match operation display " [<>!] "
-syntax match operation display " [<>!]= "
-syntax match operation display " [+=\-\*/&|~]= "
-syntax match operation display " \(&&\|||\) "
-syntax match operation display " \(&&\|||\)$"
-syntax match operation display "!"
-syntax match operation display "++"
-syntax match operation display " >>=\? "
-syntax match operation display " <<=\? "
-syntax match operation display "--"
-highligh operation ctermfg=220
+"syntax match operation display " [?:+=\-\*/&|~%^] "
+"syntax match operation display " [<>!] "
+"syntax match operation display " [<>!]= "
+"syntax match operation display " [+=\-\*/&|~]= "
+"syntax match operation display " \(&&\|||\) "
+"syntax match operation display " \(&&\|||\)$"
+"syntax match operation display "!"
+"syntax match operation display "++"
+"syntax match operation display " >>=\? "
+"syntax match operation display " <<=\? "
+"syntax match operation display "--"
+"highligh operation ctermfg=220
+
+"======================================================== 
+"" Highlight All Math Operator 
+"======================================================== 
+" C math operators 
+syn match       cMathOperator     display "[-+\*%=]" 
+"" C pointer operators 
+syn match       cPointerOperator  display "->\|\.\|\:\:" 
+" C logical   operators - boolean results 
+syn match       cLogicalOperator  display "[!<>]=\=" 
+syn match       cLogicalOperator  display "==" 
+" C bit operators 
+syn match       cBinaryOperator   display "\(&\||\|\^\|<<\|>>\)=\=" 
+syn match       cBinaryOperator   display "\~" 
+syn match       cBinaryOperatorError display "\~=" 
+" More C logical operators - highlight in preference to binary 
+syn match       cLogicalOperator  display "&&\|||" 
+syn match       cLogicalOperatorError display "\(&&\|||\)=" 
+" More C priority operators - highlight in preference to binary 
+syn match       cpriorityperator  display "(\|)\|\[\|\]\|{\|}"
+
+" Math Operator 
+hi cMathOperator            ctermfg=3           guifg=#9AC0CD 
+hi cPointerOperator         ctermfg=3           guifg=#EEAEEE 
+hi cLogicalOperator         ctermfg=3           guifg=#CDCD00 
+hi cBinaryOperator          ctermfg=3           guifg=#BBFFFF 
+hi cBinaryOperatorError     ctermfg=3           guifg=#C0FF3E 
+hi cLogicalOperator         ctermfg=3           guifg=#C0FF3E 
+hi cLogicalOperatorError    ctermfg=3           guifg=#C0FF3E 
+hi cpriorityperator       ctermfg=165           guifg=#CDAD00
 
 let b:current_syntax = "c"
 

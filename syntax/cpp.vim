@@ -72,7 +72,7 @@ hi def link cppNumber		Number
 " Highlight All Class Name
 "========================================================
 syn match   cClassName "\<[a-zA-Z_][a-zA-Z_0-9]*\>*\:"me=e-1
-hi cClassName  gui=NONE guifg=CYAN cterm=bold  ctermfg=29
+hi cClassName  gui=NONE guifg=CYAN cterm=bold  ctermfg=40
 
 " string
 syntax match string_format contained "%#\?\d\{0,3\}\.\?\d\{0,3\}[a-zA-Z]"

@@ -752,6 +752,9 @@ map <F12> :call Do_CsTag()<CR><CR>
 
 filetype  on
 
+" 取消高亮
+nmap <leader>nh :nohl<CR>
+
 "用来改变终端下光标颜色
 let color_normal = 'HotPink'
 let color_insert = 'RoyalBlue1'

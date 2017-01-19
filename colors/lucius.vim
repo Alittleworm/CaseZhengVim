@@ -14,20 +14,20 @@
   let colors_name="lucius"
   
   
-  " == Normal color ==
+  " == Normal color 正常文本==
   hi Normal           guifg=#00c8c8           guibg=#202020
-  hi Normal           ctermfg=253             ctermbg=234
+  hi Normal           ctermfg=6             ctermbg=234
   
   
-  " == Comments ==
+  " == Comments 注释==
   hi Comment          guifg=#e0e2e2                                   gui=none
-  hi Comment          ctermfg=240                                     cterm=none
+  hi Comment          ctermfg=246                                     cterm=none
   
   
-  " == Constants ==
+  " == Constants 常量==
   " any constant
   hi Constant         guifg=#ff394f                                   gui=none
-  hi Constant         ctermfg=74                                      cterm=none
+  hi Constant         ctermfg=75                                      cterm=none
   " strings
   hi String           guifg=#ffffff                                   gui=none
   hi String           ctermfg=110                                     cterm=none
@@ -36,79 +36,79 @@
   hi Character        ctermfg=110                                     cterm=none
   " numbers decimal/hex
   hi Number           guifg=#c84600                                   gui=none
-  hi Number           ctermfg=74                                      cterm=none
+  hi Number           ctermfg=126                                     cterm=none
   " true, false
   hi Boolean          guifg=#129821                                   gui=none
-  hi Boolean          ctermfg=74                                      cterm=none
+  hi Boolean          ctermfg=126                                      cterm=none
   " float
   hi Float            guifg=#129821                                   gui=none
-  hi Float            ctermfg=74                                      cterm=none
+  hi Float            ctermfg=126                                      cterm=none
   
   
   " == Identifiers ==
   " any variable name
   hi Identifier       guifg=#86c6b6                                   gui=none 
-  hi Identifier       ctermfg=116                                     cterm=none
+  hi Identifier       ctermfg=161                                     cterm=none
   " function, method, class
   hi Function         guifg=#86c6b6                                   gui=none 
-  hi Function         ctermfg=116                                     cterm=none
+  hi Function         ctermfg=161                                     cterm=none
   
   
-  " == Statements ==
+  " == Statements 关键字==
   " any statement
   hi Statement        guifg=#b3d38c                                   gui=none
-  hi Statement        ctermfg=150                                     cterm=none
+  hi Statement        ctermfg=226                                     cterm=none
   " if, then, else
   hi Conditional      guifg=#ffff00                                   gui=none
-  hi Conditional      ctermfg=150                                     cterm=none
+  hi Conditional      ctermfg=226                                     cterm=none
   " try, catch, throw, raise
   hi Exception        guifg=#b3d38c                                   gui=none
-  hi Exception        ctermfg=150                                     cterm=none
+  hi Exception        ctermfg=226   cterm=none
   " for, while, do
   hi Repeat           guifg=#ffff00                                   gui=none
-  hi Repeat           ctermfg=150                                     cterm=none
+  hi Repeat           ctermfg=226   cterm=none
   " case, default
   hi Label            guifg=#ffff00                                   gui=none
-  hi Label            ctermfg=150                                     cterm=none
+  hi Label            ctermfg=226   cterm=none
   " sizeof, +, *
   hi Operator         guifg=#ffff00                                   gui=none
-  hi Operator         ctermfg=150                                     cterm=none
+  hi Operator         ctermfg=226   cterm=none
   " any other keyword
   hi Keyword          guifg=#ffff00                                   gui=none
-  hi Keyword          ctermfg=150                                     cterm=none
+  hi Keyword          ctermfg=226   cterm=none
   
   
-  " == Preprocessor ==
+  " == Preprocessor 预处理 ==
   " generic preprocessor
   hi PreProc          guifg=#e0e8b0                                   gui=none
-  hi PreProc          ctermfg=187                                     cterm=none
+  hi PreProc          ctermfg=148                                     cterm=none
   " #include
   hi Include          guifg=#00be00                                   gui=none
-  hi Include          ctermfg=187                                     cterm=none
+  hi Include          ctermfg=148                                     cterm=none
   " #define
   hi Define           guifg=#00be00                                   gui=none
-  hi Define           ctermfg=187                                     cterm=none
+  hi Define           ctermfg=148                                     cterm=none
   " same as define
   hi Macro            guifg=#00be00                                   gui=none
-  hi Macro            ctermfg=187                                     cterm=none
+  hi Macro            ctermfg=148                                     cterm=none
   " #if, #else, #endif
   hi PreCondit        guifg=#ffff00                                   gui=none
-  hi PreCondit        ctermfg=187                                     cterm=none
+  hi PreCondit        ctermfg=148                                     cterm=none
   
   
-  " == Types ==
+  " == Types 类型==
   " int, long, char
   hi Type             guifg=#00be00                                   gui=none
-  hi Type             ctermfg=115                                     cterm=none
+  hi Type             ctermfg=82                                     cterm=none
   " static, register, volative
   hi StorageClass     guifg=#00be00                                   gui=none
-  hi StorageClass     ctermfg=115                                     cterm=none
+  hi StorageClass     ctermfg=82                                     cterm=none
   " struct, union, enum
   hi Structure        guifg=#00be00                                   gui=none
-  hi Structure        ctermfg=115                                     cterm=none
+  hi Structure        ctermfg=82                                     cterm=none
   " typedef
   hi Typedef          guifg=#ffff00                                   gui=none
-  hi Typedef          ctermfg=115                                     cterm=none
+  hi Typedef          ctermfg=82                                     cterm=none
   
   
   " == Special ==
@@ -186,7 +186,7 @@
   hi IncSearch        ctermfg=87                                      cterm=reverse
   " hlsearch (last search pattern), also used for quickfix
   hi Search                                    guibg=#ffaa33          gui=none
-  hi Search                                    ctermbg=214            cterm=none
+  hi Search                                    ctermbg=222            cterm=none
   
   
   " == UI ==
