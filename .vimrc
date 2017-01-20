@@ -42,23 +42,34 @@ Plugin 'gmarik/vundle'
 
 " Better file browser
 Plugin 'scrooloose/nerdtree'
+
 " Code commenter 快速注释/解开注释
 Plugin 'scrooloose/nerdcommenter'
+
+" 注释快速生成
+Plugin 'DoxygenToolkit.vim'
+
 " Class/module browser
 Plugin 'majutsushi/tagbar'
+
 " Code and files fuzzy finder 模糊搜索, 可以搜索文件/buffer/mru/tag等等
 Plugin 'kien/ctrlp.vim'
+
 " Extension to ctrlp, for fuzzy command finder
 Plugin 'fisadev/vim-ctrlp-cmdpalette'
+
 " Maybe the best Git integration 处理 git merge 文件冲突
 Plugin 'tpope/vim-fugitive'
+
 " Tab list panel   Tab管理
 Plugin 'kien/tabman.vim'
+
 " Airline 状态栏
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+
 " Pending tasks list
-Plugin 'fisadev/FixedTaskList.vim'
+"Plugin 'fisadev/FixedTaskList.vim'
 
 "让cpp文件在.h和.cpp文件中切换
 Bundle 'vim-scripts/a.vim'
@@ -183,6 +194,8 @@ set selectmode=mouse,key
 
 " 去掉输入错误的提示声音
 set noeb
+" 修改Lender为','默认为'\'
+let g:mapleader = ","
 
 " 一行显示不下换行显示，但不插入换行
 set wrap
@@ -379,8 +392,46 @@ endif
 " Plugins settings and mappings
 " Edit them as you wish.
 
-" Tagbar ----------------------------- 
+" nerdcommenter ----------------------
+"1、 \cc 注释当前行和选中行  
+"2、 \cn 没有发现和\cc有区别  
+"3、 \c<空格> 如果被选区域有部分被注释，则对被选区域执行取消注释操作，其它情况执行反转注释操作  
+"4、 \cm 对被选区域用一对注释符进行注释，前面的注释对每一行都会添加注释  
+"5、 \ci 执行反转注释操作，选中区域注释部分取消注释，非注释部分添加注释  
+"6、 \cs 添加性感的注释，代码开头介绍部分通常使用该注释  
+"7、 \cy 添加注释，并复制被添加注释的部分  
+"8、 \c$ 注释当前光标到改行结尾的内容  
+"9、 \cA 跳转到该行结尾添加注释，并进入编辑模式  
+"10、\ca 转换注释的方式，比如： /**/和//  
+"11、\cl \cb 左对齐和左右对其，左右对其主要针对/**/  
+"12、\cu 取消注释 
+"命令 \cc 中的 \ 为<Leader>符，<Leader>符默认为 \ 
 
+
+" DoxygenToolkit ---------------------
+let g:DoxygenToolkit_briefTag_funcName = "yes"
+
+let g:DoxygenToolkit_commentType = "C++"
+let g:DoxygenToolkit_briefTag_pre = "Synopsis: "            "简介
+let g:DoxygenToolkit_templateParamTag_pre = "TTaram: "
+let g:DoxygenToolkit_paramTag_pre = "Param: "                "参数
+let g:DoxygenToolkit_returnTag = "Return: "                 "返回值
+let g:DoxygenToolkit_throwTag_pre = "Throw " " @exception is also valid
+let g:DoxygenToolkit_fileTag = "File: "                     "文件名
+let g:DoxygenToolkit_dateTag = "Date: "                     "日期
+let g:DoxygenToolkit_authorTag = "Author: "                 "作者
+let g:DoxygenToolkit_versionTag = "Version: "               "版本
+let g:DoxygenToolkit_blockTag = "Name: "
+let g:DoxygenToolkit_classTag = "Class: "
+let g:DoxygenToolkit_authorName = "CaseZheng, 764307915@qq.com"
+let g:doxygen_enhanced_color = 1
+let g:load_doxygen_syntax = 1
+"作者
+nmap <Leader>dl :DoxAuthor<CR>
+"函数/类注释
+nmap <Leader>dd :Dox<CR>
+
+" Tagbar ----------------------------- 
 " toggle tagbar display 打开 Tag 列表
 map <F4> :TagbarToggle<CR>
 " autofocus on tagbar open
@@ -720,7 +771,6 @@ endif
 :set path+=$VIMPROJECT/vimlib/linux/include/sys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:mapleader = ","
 
 function Do_CsTag()
     let dir = getcwd()
