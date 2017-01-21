@@ -110,6 +110,10 @@ Plugin 'godlygeek/tabular'
 " Search results counter
 Plugin 'IndexedSearch'
 
+" Lua代码高亮补全
+Plugin 'xolox/vim-lua-ftplugin'
+Plugin 'xolox/vim-misc'
+
 " Gvim colorscheme
 Plugin 'Wombat'
 
