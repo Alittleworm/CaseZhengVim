@@ -575,7 +575,7 @@ let g:syntastic_enable_balloons = 1 "whether to show balloons
 let g:acp_enableAtStartup = 0
 " Use neocomplcache.
 " 在系统启动的时候启动neocomplcache
-let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_at_startup = 1
 "let g:neocomplcache_enable_ignore_case = 1
 " Use smartcase.
 "let g:neocomplcache_enable_smart_case = 1
