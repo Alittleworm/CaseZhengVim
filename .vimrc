@@ -114,6 +114,11 @@ Plugin 'IndexedSearch'
 Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'xolox/vim-misc'
 
+" Grep
+Plugin 'yegappan/grep'
+
+"Plugin 'WolfgangMehner/lua-support'
+
 " Gvim colorscheme
 Plugin 'Wombat'
 
@@ -147,7 +152,6 @@ set fileformats=unix,dos        "处理文件格式问题,将UNIX文件格式做
 source $VIMRUNTIME/delmenu.vim  "vim的菜单乱码解决
 source $VIMRUNTIME/menu.vim     "vim的菜单乱码解决
 language messages zh_CN.utf-8   "vim提示信息乱码的解决
-
 " 侦测文件类型
 filetype on
 " allow plugins by file type (required for plugins!)
@@ -808,12 +812,13 @@ function Do_CsTag()
         return
     endif
     if(executable('ctags'))
-        silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q ."
+         silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q ."
+"         silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q --langdef=MYLUA --langmap=MYLUA:.lua --regex-MYLUA="/^.*\s*function\s*(\w+):(\w+).*$/\2/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*[0-9]+.*$/\1/e/" --regex-MYLU A="/^.*\s*function\s*(\w+)\.(\w+).*$/\2/f/" --regex-MYLUA="/^.*\s*function\s*(\w+)\s*\(.*$/\1/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*\{.*$/\1/e/" --regex-MYLUA="/^\s*module\s+\"(\w+)\".*$/\1/m,module/" --regex-MYLUA="/^\s*module\s+\"[a-zA-Z0-9._]+\.(\w+)\".*$/\1/m,module/" --languages=MYLUA --excmd=number ."
     else
         echohl WarningMsg | echo "Fail ctags" | echohl None
     endif
     if(executable('cscope') && has("cscope") )
-        silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+        silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' -o -name '*.inl' -o -name '*.hpp' -o -name '*.lua' > cscope.files"
         silent! execute "!cscope -b"
         execute "normal :"
         if filereadable("cscope.out")
