@@ -346,6 +346,8 @@ hi def link luaSpecial		SpecialChar
 hi def link luaFunc		Identifier
 hi def link luaLabel		Label
 
+hi luaFunction ctermfg=196
+
 let b:current_syntax = "lua"
 
 let &cpo = s:cpo_save

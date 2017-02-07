@@ -831,6 +831,8 @@ endfunction
 "更新TAG
 map <F12> :call Do_CsTag()<CR><CR>
 
+nmap <silent><F6> :Grep <c-r><c-w> * -r <CR>
+
 filetype  on
 
 " 取消高亮
