@@ -114,6 +114,9 @@ Plugin 'IndexedSearch'
 Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'xolox/vim-misc'
 
+" 多窗口插件
+Plugin 'minibufexplorerpp'
+
 " Grep
 Plugin 'yegappan/grep'
 
@@ -630,6 +633,15 @@ let g:tabman_toggle = 'tl'
 " 将光标移动到tab管理窗口
 let g:tabman_focus  = 'tf'
 
+"""""""""""""""""""""""""""""""""""""""""""minibufexpl"""""""""""""""""""""""""""""""""""""""""""""
+"多文档编辑  minibufexpl.vim
+let g:miniBufExplMapCTabSwitchBufs=1        "启用以下两个功能：Ctrl+tab移到下一个buffer并在当前窗口打开；Ctrl+Shift+tab移到上一个buffer并在当前窗口打开
+let g:miniBufExplMapWindowsNavVim=1         "按下Ctrl+h/j/k/l，可以切换到当前窗口的上下左右窗口
+let g:miniBufExplMapWindowNavArrows=1       "按下Ctrl+箭头，可以切换到当前窗口的上下左右窗口
+"let g:miniBufExplMapCTabSwitchWindows=1    "启用以下两个功能：Ctrl+tab移到下一个窗口；Ctrl+Shift+tab移到上一个窗口；
+let g:miniBufExplModSelTarget=1             "不要在不可编辑内容的窗口（如TagList窗口）中打开选中的buffer
+let g:miniBufExplorerMoreThanOne=0			"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Signify ------------------------------
 " this first setting decides in which order try to guess your current vcs
