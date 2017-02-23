@@ -423,7 +423,7 @@ endif
 " DoxygenToolkit ---------------------
 let g:DoxygenToolkit_briefTag_funcName = "yes"
 
-let g:DoxygenToolkit_commentType = "C++"
+"let g:DoxygenToolkit_commentType = "C++"
 let g:DoxygenToolkit_briefTag_pre = "Synopsis: "            "简介
 let g:DoxygenToolkit_templateParamTag_pre = "TTaram: "
 let g:DoxygenToolkit_paramTag_pre = "Param: "                "参数
