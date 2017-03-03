@@ -337,6 +337,7 @@ imap <C-J> <C-X><C-O>
 " (displays documentation related to the selected completion option)
 " Disabled by default because preview makes the window flicker
 set completeopt-=preview
+set completeopt=menuone,menu,longest 
 
 " save as sudo
 ca w!! w !sudo tee "%"
@@ -758,7 +759,7 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 " 2 : 查找当前文件缓冲区和包含文件中的命名空间
 let g:OmniCpp_NamespaceSearch = 1
 " 全局查找控制。0:禁止；1:允许(缺省)
-let g:OmniCpp_GlobalScopeSearch = 0
+let g:OmniCpp_GlobalScopeSearch = 1
 " 显示访问控制信息('+', '-', '#')。0/1, 缺省为1(显示)
 let g:OmniCpp_ShowAccess = 1
 " 类成员显示控制(公有(public)私有(private)保护(protected)成员)。 0 : 自动 1 : 显示所有成员
@@ -779,6 +780,9 @@ let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " 自动选择第一个匹配项。仅当completeopt不为longest时有效。0 :不选择第一项(缺省) 1 : 选择第一项并插入到光标
 " 位置 2 : 选择第一项但不插入光标位置
 "let g:OmniCpp_SelectFirstItem = 0
+
+"自动关闭补全窗口
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif 
 
 let g:VIMPROJECT = '~/.vim'
 let g:iswindows = 0
