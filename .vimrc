@@ -459,7 +459,7 @@ nmap ,t :NERDTreeFind<CR>
 " don;t show these file types  过滤文件和文件夹的显示
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$']
 " 设置宽度
-let NERDTreeWinSize=35
+let NERDTreeWinSize=25
 " 排序
 let NERDTreeCaseSensitiveSort=1
 "let NERDTreeBookmarksFile=       "指定书签文件
@@ -756,9 +756,9 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""onmicppcompete"""""""""""""""""""""""""""""""""""""""""""""
 " 命名空间查找控制。0 : 禁止查找命名空间 1 : 查找当前文件缓冲区内的命名空间(缺省) 
 " 2 : 查找当前文件缓冲区和包含文件中的命名空间
-let g:OmniCpp_NamespaceSearch = 2
+let g:OmniCpp_NamespaceSearch = 1
 " 全局查找控制。0:禁止；1:允许(缺省)
-let g:OmniCpp_GlobalScopeSearch = 1
+let g:OmniCpp_GlobalScopeSearch = 0
 " 显示访问控制信息('+', '-', '#')。0/1, 缺省为1(显示)
 let g:OmniCpp_ShowAccess = 1
 " 类成员显示控制(公有(public)私有(private)保护(protected)成员)。 0 : 自动 1 : 显示所有成员
@@ -767,13 +767,13 @@ let g:OmniCpp_DisplayMode = 0
 " 缩略信息最后一列。 0 : 信息缩略中不显示匹配项所在域(缺省) 1 : 显示匹配项所在域，并移除缩略信息中最后一列
 let OmniCpp_ShowScopeInAbbr = 1
 " 显示补全提示缩略信息中显示函数原型。0 : 不显示(缺省) 1 : 显示原型
-let g:OmniCpp_ShowPrototypeInAbbr = 1
+let g:OmniCpp_ShowPrototypeInAbbr = 0
 " 在'.'号后自动运行omnicppcomplete给出提示信息。0/1, 缺省为1
-let g:OmniCpp_MayCompleteDot = 1
+let g:OmniCpp_MayCompleteDot = 0
 " 在->后自动运行omnicppcomplete给出提示信息。0/1, 缺省为1
-let g:OmniCpp_MayCompleteArrow = 1
+let g:OmniCpp_MayCompleteArrow = 0
 " 在域标识符::后是否自动运行omnicppcomplete给出提示信息。0/1, 缺省为0
-let g:OmniCpp_MayCompleteScope = 1
+let g:OmniCpp_MayCompleteScope = 0
 " 默认命名空间列表，项目间使用','隔开
 let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " 自动选择第一个匹配项。仅当completeopt不为longest时有效。0 :不选择第一项(缺省) 1 : 选择第一项并插入到光标
@@ -874,6 +874,7 @@ elseif &term =~ "screen"
         endif
     endif
 endif
+
 unlet color_normal
 unlet color_insert
 unlet color_exit
