@@ -16,19 +16,38 @@ set t_Co=256
 
 " Setting up Vundle - the best vim plugin manager  如果Vundle不存在则clone一个
 let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
-    echo "Installing Vundle..."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
-    let iCanHazVundle=0
+if(g:iswindows)
+	let vundle_readme=expand('$vimpath/vimfiles/bundle/Vundle/README.md')
+else
+	let vundle_readme=expand('$vimpath/.vim/bundle/vundle/README.md')
+endif
+
+if(!g:iswindows)
+	if !filereadable(vundle_readme)
+	    echo "Installing Vundle..."
+	    echo ""
+	    if(g:iswindows)
+		let g:vimbundlepath = $vimpath."vimfile/bundle"
+	    else
+		let g:vimbundlepath = $vimpath.".vim/bundle"
+	    endif
+
+	    silent !md  g:vimbundlepath
+	    silent !echo g:vimbundlepath
+	    silent !git clone https://github.com/VundleVim/Vundle.vim.git g:vimbundlepath
+	    let iCanHazVundle=0
+	endif
 endif
 
 " 侦测文件类型 关闭
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+if(g:iswindows)
+	set rtp+=C:/MyProgramFiles/Vim/vimfiles/bundle/Vundle/ 
+else
+	set rtp+=~/.vim/bundle/vundle/ 
+endif
+
 call vundle#rc()
 
 " let Vundle manage Plugins
@@ -255,7 +274,7 @@ set incsearch
 " highlighted search results
 set hlsearch
 " search ignore case 搜索模式里忽略大小写
-set ignorecase
+"set ignorecase
 " muting search highlighting 
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
@@ -751,6 +770,9 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 "cp<cr> "切换到上一个结果
 "设定使用 quickfix 窗口来显示 cscope 的查询结果  
 ""set cscopequickfix=s-,c-,d-,i-,t-,e-   
+if(iswindows)
+	set csprg=$vimpath."vimfiles/exec/cscope.exe
+endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
