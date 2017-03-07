@@ -32,9 +32,8 @@ if(!g:iswindows)
 		let g:vimbundlepath = $vimpath.".vim/bundle"
 	    endif
 
-	    silent !md  g:vimbundlepath
-	    silent !echo g:vimbundlepath
-	    silent !git clone https://github.com/VundleVim/Vundle.vim.git g:vimbundlepath
+	    silent !makir -p  ~/.vim/bundle
+	    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/
 	    let iCanHazVundle=0
 	endif
 endif
@@ -199,6 +198,14 @@ set cursorcolumn
 
 set novisualbell    " 不要闪烁(不明白)
 
+if(g:iswindows)
+    set guioptions -=T  "隐藏工具栏
+    " 字体设置
+    set guifont=Consolas:h10
+    " 打开后默认全屏
+    autocmd GUIEnter * simalt ~x
+endif
+
 " hidden startup messages 启动的时候不显示那个援助乌干达儿童的提示
 set shortmess=atI
 " auto read and write
@@ -236,8 +243,6 @@ set clipboard+=unnamed
 
 " 历史记录条数
 set history=20
-" 字体设置
-set guifont=幼圆:h12
 
 "set gfw=幼圆:h10:cGB2312
 
@@ -666,7 +671,12 @@ let g:miniBufExplorerMoreThanOne=0			"
 " Signify ------------------------------
 " this first setting decides in which order try to guess your current vcs
 " UPDATE it to reflect your preferences, it will speed up opening files
- let g:signify_vcs_list = [ 'git', 'hg' ]
+ let g:signify_vcs_list = [ 'git', 'hg', 'svn']
+
+let g:signify_vcs_cmds = {
+    \ 'svn': '"C:\Program Files\TortoiseSVN\bin\TortoiseMerge.exe" diff --diff-cmd %d -x -U0 -- %f'
+    \ }
+
 " mappings to jump to changed blocks
  nmap <leader>sn <plug>(signify-next-hunk)
  nmap <leader>sp <plug>(signify-prev-hunk)
@@ -770,9 +780,6 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 "cp<cr> "切换到上一个结果
 "设定使用 quickfix 窗口来显示 cscope 的查询结果  
 ""set cscopequickfix=s-,c-,d-,i-,t-,e-   
-if(iswindows)
-	set csprg=$vimpath."vimfiles/exec/cscope.exe
-endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -806,8 +813,7 @@ let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 "自动关闭补全窗口
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif 
 
-let g:VIMPROJECT = '~/.vim'
-let g:iswindows = 0
+let $VIMPROJECT = $vimpath."vimfiles"
 if(g:iswindows==1)
     :set tags+=$VIMPROJECT/vimlib/cppstl/tags,$VIMPROJECT/vimlib/linux/tags
 else
@@ -826,28 +832,41 @@ function Do_CsTag()
     let g:csoutdeleted=0
     echohl WarningMsg | echo dir | echohl None
     if filereadable("tags")
-         g:tagsdeleted=delete("./"."tags")
-     endif
-    if(g:tagsdeleted!=0)
-        echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
+        if(g:iswindows==1)
+            let tagsdeleted=delete(dir."\\"."tags")
+        else
+            let tagsdeleted=delete("./"."tags")
+        endif
+        if(tagsdeleted!=0)
+            echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
         return
+        endif
     endif
+    
     if has("cscope")
         silent! execute "cs kill -1"
     endif
     if filereadable("cscope.files")
-        g:csfilesdeleted=delete("./"."cscope.files")
-    endif
-    if(g:csfilesdeleted!=0)
-        echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
-        return
+        if(g:iswindows==1)
+            let csfilesdeleted=delete(dir."\\"."cscope.files")
+        else
+            let csfilesdeleted=delete("./"."cscope.files")
+        endif
+        if(g:csfilesdeleted!=0)
+            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
+            return
+        endif
     endif
     if filereadable("cscope.out")
-        g:csoutdeleted=delete("./"."cscope.out")
-    endif
-    if(g:csoutdeleted!=0)
-        echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
-        return
+        if(g:iswindows==1)
+            let csoutdeleted=delete(dir."\\"."cscope.out")
+        else
+            let csoutdeleted=delete("./"."cscope.out")
+        endif
+        if(g:csoutdeleted!=0)
+            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
+            return
+        endif
     endif
     if(executable('ctags'))
          silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q ."
