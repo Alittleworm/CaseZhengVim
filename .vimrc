@@ -498,6 +498,11 @@ let NERDTreeShowFiles=1
 "let NERDTreeWinPos='right'              "将 NERDTree 的窗口设置在 vim 窗口的右侧，默认在左
 let NERDChristmasTree=1                 "让树更好看
 
+if(g:iswindows)
+    "在 vim 启动的时候默认开启 NERDTree（autocmd 可以缩写为 au）
+    autocmd VimEnter * NERDTree
+endif
+
 " Tasklist ------------------------------
 " show pending tasks list
 map <F11> :TaskList<CR>
@@ -875,7 +880,11 @@ function Do_CsTag()
         echohl WarningMsg | echo "Fail ctags" | echohl None
     endif
     if(executable('cscope') && has("cscope") )
-        silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' -o -name '*.inl' -o -name '*.hpp' -o -name '*.lua' > cscope.files"
+        if(g:iswindows!=1)
+              silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+          else
+              silent! execute "!dir /s/b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+        endif
         silent! execute "!cscope -b"
         execute "normal :"
         if filereadable("cscope.out")
@@ -919,6 +928,14 @@ elseif &term =~ "screen"
         endif
     endif
 endif
+
+if(executable('cscope') && has("cscope") )
+    silent! execute "!cscope -b"
+    if filereadable("cscope.out")
+        execute "cs add cscope.out"
+    endif
+endif
+:redr!
 
 unlet color_normal
 unlet color_insert
