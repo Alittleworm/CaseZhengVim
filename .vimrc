@@ -19,23 +19,17 @@ let iCanHazVundle=1
 if(g:iswindows)
 	let vundle_readme=expand('$vimpath/vimfiles/bundle/Vundle/README.md')
 else
-	let vundle_readme=expand('$vimpath/.vim/bundle/vundle/README.md')
+	let vundle_readme=$vimpath.'.vim/bundle/Vundle/README.md'
 endif
 
-if(!g:iswindows)
-	if !filereadable(vundle_readme)
-	    echo "Installing Vundle..."
-	    echo ""
-	    if(g:iswindows)
-		let g:vimbundlepath = $vimpath."vimfile/bundle"
-	    else
-		let g:vimbundlepath = $vimpath.".vim/bundle"
-	    endif
-
-	    silent !makir -p  ~/.vim/bundle
-	    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/
-	    let iCanHazVundle=0
-	endif
+"if(g:iswindows==0 && !filereadable("~/.vim/bundle/Vundle/README.md"))
+if(g:iswindows==0 && !filereadable(vundle_readme)==0)
+    echo !filereadable(vundle_readme)
+    echo "Installing Vundle..."
+    echo ""
+    silent !mkdir -p  ~/.vim/bundle
+    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle
+    let iCanHazVundle=0
 endif
 
 " 侦测文件类型 关闭
@@ -44,13 +38,13 @@ filetype off
 if(g:iswindows)
 	set rtp+=C:/MyProgramFiles/Vim/vimfiles/bundle/Vundle/ 
 else
-	set rtp+=~/.vim/bundle/vundle/ 
+	set rtp+=~/.vim/bundle/Vundle/ 
 endif
 
 call vundle#rc()
 
 " let Vundle manage Plugins
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle'
 
 " ============================================================================
 " Active plugins
@@ -95,8 +89,12 @@ Bundle 'vim-scripts/a.vim'
 " Python mode (indentation, doc, refactor, lints, code checking, motion and
 " operators, highlighting, run and ipdb breakpoints)
 "Plugin 'klen/python-mode'
-" Better autocompletion
-Plugin 'Shougo/neocomplcache.vim'
+
+if(g:iswindows)
+	" Better autocompletion
+	Plugin 'Shougo/neocomplcache.vim'
+endif
+
 " Snippets manager (SnipMate), dependencies, and snippets repo
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -118,8 +116,11 @@ Plugin 't9md/vim-choosewin'
 "类型定义(typedef)和匿名类型(anonymous types)补全
 Bundle 'omnicppcomplete'
 
-" Python and other languages code checker 语法检测
-Plugin 'scrooloose/syntastic'
+if(g:iswindows)
+	" Python and other languages code checker 语法检测
+	Plugin 'scrooloose/syntastic'
+endif
+
 " Golang Plugins
 Plugin 'fatih/vim-go'
 " 代码对齐插件
@@ -155,7 +156,7 @@ Plugin 'guns/xterm-color-table.vim'
 " ============================================================================
 " Install plugins the first time vim runs  在安装Vundle后只运行一次
 
-if iCanHazVundle == 0
+if (iCanHazVundle==0)
     echo "Installing Plugins, please ignore key map error messages"
     echo ""
     :PluginInstall
@@ -550,40 +551,41 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 
+if(g:iswindows)
+	" Syntastic ------------------------------
+	" show list of errors and warnings on the current file
+	nmap <leader>e :Errors<CR>
+	" turn to next or previous errors, after open errors list
+	nmap <leader>n :lnext<CR>
+	nmap <leader>p :lprevious<CR>
+	" check also when just opened the file
+	let g:syntastic_check_on_open = 1
+	let g:syntastic_enable_highlighting = 1
+	let g:syntastic_check_on_wq = 0
+	let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
+	let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+	let g:syntastic_html_checkers=['tidy', 'jshint']
+	" to see error location list
+	let g:syntastic_always_populate_loc_list = 0
+	let g:syntastic_auto_loc_list = 0
+	let g:syntastic_loc_list_height = 5
+	" 修改高亮的背景色, 适应主题
+	highlight SyntasticErrorSign guifg=white guibg=black
+	" don't put icons on the sign column (it hides the vcs status icons of signify)
+	let g:syntastic_enable_signs = 0
 
-" Syntastic ------------------------------
-" show list of errors and warnings on the current file
-nmap <leader>e :Errors<CR>
-" turn to next or previous errors, after open errors list
-nmap <leader>n :lnext<CR>
-nmap <leader>p :lprevious<CR>
-" check also when just opened the file
-let g:syntastic_check_on_open = 1
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
-let g:syntastic_javascript_checkers = ['jsl', 'jshint']
-let g:syntastic_html_checkers=['tidy', 'jshint']
-" to see error location list
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_loc_list_height = 5
-" 修改高亮的背景色, 适应主题
-highlight SyntasticErrorSign guifg=white guibg=black
-" don't put icons on the sign column (it hides the vcs status icons of signify)
-let g:syntastic_enable_signs = 0
+	let g:syntastic_error_symbol = '✗'
+	let g:syntastic_warning_symbol = '⚠'
+	let g:syntastic_style_error_symbol = '✗'
+	let g:syntastic_style_warning_symbol = '⚠'
 
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-
-let g:syntastic_cpp_include_dirs = ['/usr/include/']
-let g:syntastic_cpp_remove_include_errors = 1
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
-let g:syntastic_enable_balloons = 1 "whether to show balloons
+	let g:syntastic_cpp_include_dirs = ['/usr/include/']
+	let g:syntastic_cpp_remove_include_errors = 1
+	let g:syntastic_cpp_check_header = 1
+	let g:syntastic_cpp_compiler = 'clang++'
+	let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
+	let g:syntastic_enable_balloons = 1 "whether to show balloons
+endif
 
 
 " Python-mode ------------------------------
@@ -602,58 +604,58 @@ let g:syntastic_enable_balloons = 1 "whether to show balloons
 "nmap ,o :RopeFindOccurrences<CR>
 
 
-" NeoComplCache ------------------------------
-
-" most of them not documented because I'm not sure how they work
-" (docs aren't good, had to do a lot of trial and error to make 
-" it play nice)
-
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-" 在系统启动的时候启动neocomplcache
-"let g:neocomplcache_enable_at_startup = 1
-"let g:neocomplcache_enable_ignore_case = 1
-" Use smartcase.
-"let g:neocomplcache_enable_smart_case = 1
-" 提示的时候默认选择地一个，如果你设置为0，每次输入都需要用上下键选择
-let g:neocomplcache_enable_auto_select = 1
-" 设置NeoComplCache不自动弹出补全列表
-let g:NeoComplCache_DisableAutoComplete = 1
-"let g:neocomplcache_enable_fuzzy_completion = 1
-"let g:neocomplcache_enable_camel_case_completion = 1
-"let g:neocomplcache_enable_underbar_completion = 1
-"let g:neocomplcache_fuzzy_completion_start_length = 1
-"let g:neocomplcache_auto_completion_start_length = 1
-"let g:neocomplcache_manual_completion_start_length = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_keyword_length = 3
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-" complete with workds from any opened file
-let g:neocomplcache_same_filetype_lists = {}
-let g:neocomplcache_same_filetype_lists._ = '_'
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
+if(g:iswindows)
+	" NeoComplCache ------------------------------
+	" most of them not documented because I'm not sure how they work
+	" (docs aren't good, had to do a lot of trial and error to make 
+	" it play nice)
+	" Disable AutoComplPop.
+	let g:acp_enableAtStartup = 0
+	" Use neocomplcache.
+	" 在系统启动的时候启动neocomplcache
+	"let g:neocomplcache_enable_at_startup = 1
+	"let g:neocomplcache_enable_ignore_case = 1
+	" Use smartcase.
+	"let g:neocomplcache_enable_smart_case = 1
+	" 提示的时候默认选择地一个，如果你设置为0，每次输入都需要用上下键选择
+	let g:neocomplcache_enable_auto_select = 1
+	" 设置NeoComplCache不自动弹出补全列表
+	let g:NeoComplCache_DisableAutoComplete = 1
+	"let g:neocomplcache_enable_fuzzy_completion = 1
+	"let g:neocomplcache_enable_camel_case_completion = 1
+	"let g:neocomplcache_enable_underbar_completion = 1
+	"let g:neocomplcache_fuzzy_completion_start_length = 1
+	"let g:neocomplcache_auto_completion_start_length = 1
+	"let g:neocomplcache_manual_completion_start_length = 1
+	" Set minimum syntax keyword length.
+	let g:neocomplcache_min_keyword_length = 3
+	let g:neocomplcache_min_syntax_length = 3
+	let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+	" complete with workds from any opened file
+	let g:neocomplcache_same_filetype_lists = {}
+	let g:neocomplcache_same_filetype_lists._ = '_'
+	" <TAB>: completion.
+	inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+	" Define keyword.
+	if !exists('g:neocomplcache_keyword_patterns')
+	    let g:neocomplcache_keyword_patterns = {}
+	endif
+	let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+	" Plugin key-mappings.
+	" 取消补全
+	inoremap <expr><C-g>     neocomplcache#undo_completion()
+	" 完成待补全项中共同的字符串
+	inoremap <expr><C-l>     neocomplcache#complete_common_string()
+	" <C-h>, <BS>: close popup and delete backword char.
+	" 关闭待选项
+	inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+	" 关闭待选项
+	inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+	" 关闭待选项
+	inoremap <expr><C-y>  neocomplcache#close_popup()
+	" 退出待选项
+	inoremap <expr><C-e>  neocomplcache#cancel_popup()
 endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-" Plugin key-mappings.
-" 取消补全
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-" 完成待补全项中共同的字符串
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-" <C-h>, <BS>: close popup and delete backword char.
-" 关闭待选项
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-" 关闭待选项
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-" 关闭待选项
-inoremap <expr><C-y>  neocomplcache#close_popup()
-" 退出待选项
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 
 " TabMan ------------------------------
