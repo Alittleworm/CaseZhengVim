@@ -90,9 +90,13 @@ Bundle 'vim-scripts/a.vim'
 " operators, highlighting, run and ipdb breakpoints)
 "Plugin 'klen/python-mode'
 
-if(g:iswindows)
+if(g:iswindows==1)
 	" Better autocompletion
 	Plugin 'Shougo/neocomplcache.vim'
+endif
+
+if(g:iswindows==0)
+    Bundle 'Valloric/YouCompleteMe'
 endif
 
 " Snippets manager (SnipMate), dependencies, and snippets repo
