@@ -6,169 +6,10 @@ scriptencoding utf-8
 " Update Time: 2016-09-25
 
 " ============================================================================
-" Vundle initialization
-" Avoid modify this section, unless you are very sure of what you are doing
+" 基础配置
 
 " no vi-compatible 不要使用vi的键盘模式，而是vim自己的
 set nocompatible
-
-set t_Co=256  
-
-" Setting up Vundle - the best vim plugin manager  如果Vundle不存在则clone一个
-let iCanHazVundle=1
-if(g:iswindows)
-	let vundle_readme=expand('$vimpath/vimfiles/bundle/Vundle/README.md')
-else
-	let vundle_readme=$vimpath.'.vim/bundle/Vundle/README.md'
-endif
-
-"if(g:iswindows==0 && !filereadable("~/.vim/bundle/Vundle/README.md"))
-if(g:iswindows==0 && !filereadable(vundle_readme)==0)
-    echo !filereadable(vundle_readme)
-    echo "Installing Vundle..."
-    echo ""
-    silent !mkdir -p  ~/.vim/bundle
-    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle
-    let iCanHazVundle=0
-endif
-
-" 侦测文件类型 关闭
-filetype off
-
-if(g:iswindows)
-	set rtp+=C:/MyProgramFiles/Vim/vimfiles/bundle/Vundle/ 
-else
-	set rtp+=~/.vim/bundle/Vundle/ 
-endif
-
-call vundle#rc()
-
-" let Vundle manage Plugins
-Plugin 'gmarik/Vundle'
-
-" ============================================================================
-" Active plugins
-" You can disable or add new ones here:
-
-" Plugins from github repos:
-
-" Better file browser
-Plugin 'scrooloose/nerdtree'
-
-" Code commenter 快速注释/解开注释
-Plugin 'scrooloose/nerdcommenter'
-
-" 注释快速生成
-Plugin 'DoxygenToolkit.vim'
-
-" Class/module browser
-Plugin 'majutsushi/tagbar'
-
-" Code and files fuzzy finder 模糊搜索, 可以搜索文件/buffer/mru/tag等等
-Plugin 'kien/ctrlp.vim'
-
-" Extension to ctrlp, for fuzzy command finder
-Plugin 'fisadev/vim-ctrlp-cmdpalette'
-
-" Maybe the best Git integration 处理 git merge 文件冲突
-Plugin 'tpope/vim-fugitive'
-
-" Tab list panel   Tab管理
-Plugin 'kien/tabman.vim'
-
-" Airline 状态栏
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
-" Pending tasks list
-"Plugin 'fisadev/FixedTaskList.vim'
-
-"让cpp文件在.h和.cpp文件中切换
-Bundle 'vim-scripts/a.vim'
-
-" Python mode (indentation, doc, refactor, lints, code checking, motion and
-" operators, highlighting, run and ipdb breakpoints)
-"Plugin 'klen/python-mode'
-
-if(g:iswindows==1)
-	" Better autocompletion
-	Plugin 'Shougo/neocomplcache.vim'
-endif
-
-if(g:iswindows==0)
-    Bundle 'Valloric/YouCompleteMe'
-endif
-
-" Snippets manager (SnipMate), dependencies, and snippets repo
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'honza/vim-snippets'
-Plugin 'garbas/vim-snipmate'
-" Git/mercurial/others diff icons on the side of the file lines
-" 同时支持Git 和 Svn ，速度也是相当不错的，高亮当前修改.　比较全面的一个插件
-Plugin 'mhinz/vim-signify'
-" Automatically sort python imports
-"Plugin 'fisadev/vim-isort'
-" Window chooser 窗口管理器
-Plugin 't9md/vim-choosewin'
-
-"onmicppcompete功能：
-"命名空间(namespace),类(class),结构(struct)和联合(union)补全
-"函数属性成员和返回值类型补全
-"this"指针成员补全
-"C/C++类型转换(cast)对象补全
-"类型定义(typedef)和匿名类型(anonymous types)补全
-Bundle 'omnicppcomplete'
-
-if(g:iswindows)
-	" Python and other languages code checker 语法检测
-	Plugin 'scrooloose/syntastic'
-endif
-
-" Golang Plugins
-Plugin 'fatih/vim-go'
-" 代码对齐插件
-Plugin 'godlygeek/tabular'
-
-" Search results counter
-Plugin 'IndexedSearch'
-
-" Lua代码高亮补全
-Plugin 'xolox/vim-lua-ftplugin'
-Plugin 'xolox/vim-misc'
-
-" 多窗口插件
-Plugin 'minibufexplorerpp'
-
-" Grep
-Plugin 'yegappan/grep'
-
-"Plugin 'WolfgangMehner/lua-support'
-
-" Gvim colorscheme
-Plugin 'Wombat'
-
-" awesome colorscheme
-Plugin 'tomasr/molokai'
-
-" solarized colorscheme
-Plugin 'altercation/vim-colors-solarized'
-
-" 显示终端的各种颜色对应的编号
-Plugin 'guns/xterm-color-table.vim'
-
-" ============================================================================
-" Install plugins the first time vim runs  在安装Vundle后只运行一次
-
-if (iCanHazVundle==0)
-    echo "Installing Plugins, please ignore key map error messages"
-    echo ""
-    :PluginInstall
-endif
-
-" ============================================================================
-" Vim settings and mappings
-" You can edit them as you wish
 
 set encoding=utf-8          "Vim 内部使用的字符编码方式，包括 Vim 的 buffer (缓冲区)、菜单文本、消息文本等。
 set termencoding=utf-8      "Vim 所工作的终端 (或者 Windows 的 Console 窗口) 的字符编码方式。这个选项在 Windows 下对我们常用的 GUI 模式的 gVim 无效，而对 Console 模式的 Vim 而言就是 Windows 控制台的代码页，并且通常我们不需要改变它。
@@ -330,6 +171,161 @@ set showcmd
 " 命令行显示vim当前模
 set showmode
 
+set t_Co=256  
+
+" ============================================================================
+" Vundle initialization
+" Setting up Vundle - the best vim plugin manager  如果Vundle不存在则clone一个
+let iCanHazVundle=1
+if(g:iswindows)
+	let vundle_readme=expand('$vimpath/vimfiles/bundle/Vundle/README.md')
+else
+	let vundle_readme=$vimpath.'.vim/bundle/Vundle/README.md'
+endif
+
+if(g:iswindows==0 && !filereadable(vundle_readme)==0)
+    echo !filereadable(vundle_readme)
+    echo "Installing Vundle..."
+    echo ""
+    silent !mkdir -p  ~/.vim/bundle
+    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle
+    let iCanHazVundle=0
+endif
+
+" 侦测文件类型 关闭
+filetype off
+
+if(g:iswindows)
+	set rtp+=C:/MyProgramFiles/Vim/vimfiles/bundle/Vundle/ 
+else
+	set rtp+=~/.vim/bundle/Vundle/ 
+endif
+
+call vundle#rc()
+
+" let Vundle manage Plugins
+Plugin 'gmarik/Vundle'
+
+" ============================================================================
+" Active plugins
+" You can disable or add new ones here:
+
+" Plugins from github repos:
+
+" Better file browser
+Plugin 'scrooloose/nerdtree'
+
+" Code commenter 快速注释/解开注释
+Plugin 'scrooloose/nerdcommenter'
+
+" 注释快速生成
+Plugin 'DoxygenToolkit.vim'
+
+" Class/module browser
+Plugin 'majutsushi/tagbar'
+
+" Code and files fuzzy finder 模糊搜索, 可以搜索文件/buffer/mru/tag等等
+Plugin 'kien/ctrlp.vim'
+
+" Extension to ctrlp, for fuzzy command finder
+Plugin 'fisadev/vim-ctrlp-cmdpalette'
+
+" Maybe the best Git integration 处理 git merge 文件冲突
+Plugin 'tpope/vim-fugitive'
+
+" Tab list panel   Tab管理
+Plugin 'kien/tabman.vim'
+
+" Airline 状态栏
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" Pending tasks list
+"Plugin 'fisadev/FixedTaskList.vim'
+
+"让cpp文件在.h和.cpp文件中切换
+Bundle 'vim-scripts/a.vim'
+
+" Python mode (indentation, doc, refactor, lints, code checking, motion and
+" operators, highlighting, run and ipdb breakpoints)
+"Plugin 'klen/python-mode'
+
+if(g:iswindows==1)
+	" Better autocompletion
+	"Plugin 'Shougo/neocomplcache.vim'
+endif
+
+if(g:iswindows==0)
+    Bundle 'Valloric/YouCompleteMe'
+endif
+
+" Snippets manager (SnipMate), dependencies, and snippets repo
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'honza/vim-snippets'
+Plugin 'garbas/vim-snipmate'
+" Git/mercurial/others diff icons on the side of the file lines
+" 同时支持Git 和 Svn ，速度也是相当不错的，高亮当前修改.　比较全面的一个插件
+Plugin 'mhinz/vim-signify'
+" Automatically sort python imports
+"Plugin 'fisadev/vim-isort'
+" Window chooser 窗口管理器
+Plugin 't9md/vim-choosewin'
+
+"onmicppcompete功能：
+"命名空间(namespace),类(class),结构(struct)和联合(union)补全
+"函数属性成员和返回值类型补全
+"this"指针成员补全
+"C/C++类型转换(cast)对象补全
+"类型定义(typedef)和匿名类型(anonymous types)补全
+Bundle 'omnicppcomplete'
+
+if(g:iswindows)
+	" Python and other languages code checker 语法检测
+	Plugin 'scrooloose/syntastic'
+endif
+
+" Golang Plugins
+Plugin 'fatih/vim-go'
+" 代码对齐插件
+Plugin 'godlygeek/tabular'
+
+" Search results counter
+Plugin 'IndexedSearch'
+
+" Lua代码高亮补全
+Plugin 'xolox/vim-lua-ftplugin'
+Plugin 'xolox/vim-misc'
+
+" 多窗口插件
+Plugin 'minibufexplorerpp'
+
+" Grep
+Plugin 'yegappan/grep'
+
+"Plugin 'WolfgangMehner/lua-support'
+
+" Gvim colorscheme
+Plugin 'Wombat'
+
+" awesome colorscheme
+Plugin 'tomasr/molokai'
+
+" solarized colorscheme
+Plugin 'altercation/vim-colors-solarized'
+
+" 显示终端的各种颜色对应的编号
+Plugin 'guns/xterm-color-table.vim'
+
+" ============================================================================
+" Install plugins the first time vim runs  在安装Vundle后只运行一次
+
+if (iCanHazVundle==0)
+    echo "Installing Plugins, please ignore key map error messages"
+    echo ""
+    :PluginInstall
+endif
+
 " tab navigation mappings
 " 后一个
 map tn :tabn<CR>
@@ -411,23 +407,25 @@ colorscheme lucius
 set wildmenu
 set wildmode=full
 
-" better backup, swap and undos storage
-set directory=~/.vim/dirs/tmp     " directory to place swap files in
-set backup                        " make backup files
-set backupdir=~/.vim/dirs/backups " where to put backup files
-set undofile                      " persistent undos - undo after you re-open the file
-set undodir=~/.vim/dirs/undos
-set viminfo+=n~/.vim/dirs/viminfo
+if(g:iswindows==0)
+    " better backup, swap and undos storage
+    set directory=~/.vim/dirs/tmp     " directory to place swap files in
+    set backup                        " make backup files
+    set backupdir=~/.vim/dirs/backups " where to put backup files
+    set undofile                      " persistent undos - undo after you re-open the file
+    set undodir=~/.vim/dirs/undos
+    set viminfo+=n~/.vim/dirs/viminfo
 
-" create needed directories if they don't exist
-if !isdirectory(&backupdir)
-    call mkdir(&backupdir, "p")
-endif
-if !isdirectory(&directory)
-    call mkdir(&directory, "p")
-endif
-if !isdirectory(&undodir)
-    call mkdir(&undodir, "p")
+    " create needed directories if they don't exist
+    if !isdirectory(&backupdir)
+        call mkdir(&backupdir, "p")
+    endif
+    if !isdirectory(&directory)
+        call mkdir(&directory, "p")
+    endif
+    if !isdirectory(&undodir)
+        call mkdir(&undodir, "p")
+    endif
 endif
 
 " ============================================================================
@@ -719,16 +717,14 @@ let g:choosewin_overlay_enable = 1
 "     win_land    Navigate to current window
 "                 Disable predefined keymaping
 
-
-
 " Airline ------------------------------
 let g:airline_powerline_fonts = 1
-"let g:airline_theme = 'luna'
-let g:airline_theme = 'bubblegum'
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#whitespace#enabled = 1
+let g:airline_theme = 'luna'
+"let g:airline_theme = 'bubblegum'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline#extensions#whitespace#enabled = 1
 
 " to use fancy symbols for airline, uncomment the following lines and use a
 " patched font (more info on the README.rst)
@@ -806,7 +802,7 @@ let g:OmniCpp_ShowAccess = 1
 let g:OmniCpp_DisplayMode = 0
 " 选项用来控制匹配项所在域的显示位置。缺省情况下，omni显示的补全提示菜单中总是将匹配项所在域信息显示在
 " 缩略信息最后一列。 0 : 信息缩略中不显示匹配项所在域(缺省) 1 : 显示匹配项所在域，并移除缩略信息中最后一列
-let OmniCpp_ShowScopeInAbbr = 1
+let OmniCpp_ShowScopeInAbbr = 0
 " 显示补全提示缩略信息中显示函数原型。0 : 不显示(缺省) 1 : 显示原型
 let g:OmniCpp_ShowPrototypeInAbbr = 0
 " 在'.'号后自动运行omnicppcomplete给出提示信息。0/1, 缺省为1
@@ -822,7 +818,7 @@ let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 "let g:OmniCpp_SelectFirstItem = 0
 
 "自动关闭补全窗口
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif 
+"au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif 
 
 let $VIMPROJECT = $vimpath."vimfiles"
 if(g:iswindows==1)
@@ -834,7 +830,6 @@ endif
 :set path+=$VIMPROJECT/vimlib/cppstl/cpp_src,$VIMPROJECT/vimlib/linux/include
 :set path+=$VIMPROJECT/vimlib/linux/include/sys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 function Do_CsTag()
     let dir = getcwd()
