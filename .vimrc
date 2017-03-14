@@ -19,6 +19,8 @@ set fileformats=unix,dos        "处理文件格式问题,将UNIX文件格式做
 source $VIMRUNTIME/delmenu.vim  "vim的菜单乱码解决
 source $VIMRUNTIME/menu.vim     "vim的菜单乱码解决
 language messages zh_CN.utf-8   "vim提示信息乱码的解决
+"设置为双字宽显示，否则无法完整显示如:☆
+set ambiwidth=double
 " 侦测文件类型
 filetype on
 " allow plugins by file type (required for plugins!)
@@ -49,7 +51,15 @@ if(g:iswindows)
     " 字体设置
     set guifont=Consolas:h10
     " 打开后默认全屏
-    autocmd GUIEnter * simalt ~x
+    if has('win32')    
+        au GUIEnter * simalt ~x
+    else    
+        au GUIEnter * call MaximizeWindow()
+    endif 
+
+    function! MaximizeWindow()    
+        silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+    endfunction
 endif
 
 " hidden startup messages 启动的时候不显示那个援助乌干达儿童的提示
@@ -239,6 +249,9 @@ Plugin 'kien/tabman.vim'
 " Airline 状态栏
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+if(g:iswindows)
+    Plugin 'eugeii/consolas-powerline-vim'
+endif
 
 " Pending tasks list
 "Plugin 'fisadev/FixedTaskList.vim'
@@ -250,10 +263,10 @@ Bundle 'vim-scripts/a.vim'
 " operators, highlighting, run and ipdb breakpoints)
 "Plugin 'klen/python-mode'
 
-if(g:iswindows==1)
-	" Better autocompletion
-	"Plugin 'Shougo/neocomplcache.vim'
-endif
+"if(g:iswindows==1)
+"    " Better autocompletion
+"    Plugin 'Shougo/neocomplcache.vim'
+"endif
 
 if(g:iswindows==0)
     Bundle 'Valloric/YouCompleteMe'
@@ -280,10 +293,10 @@ Plugin 't9md/vim-choosewin'
 "类型定义(typedef)和匿名类型(anonymous types)补全
 Bundle 'omnicppcomplete'
 
-if(g:iswindows)
-	" Python and other languages code checker 语法检测
-	Plugin 'scrooloose/syntastic'
-endif
+"if(g:iswindows)
+"    "Python and other languages code checker 语法检测
+"    Plugin 'scrooloose/syntastic'
+"endif
 
 " Golang Plugins
 Plugin 'fatih/vim-go'
@@ -297,11 +310,11 @@ Plugin 'IndexedSearch'
 Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'xolox/vim-misc'
 
-" 多窗口插件
-Plugin 'minibufexplorerpp'
+" 多窗口插件 airline有这个功能  屏蔽啦
+"Plugin 'minibufexplorerpp'
 
 " Grep
-Plugin 'yegappan/grep'
+"Plugin 'yegappan/grep'
 
 "Plugin 'WolfgangMehner/lua-support'
 
@@ -315,7 +328,7 @@ Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 
 " 显示终端的各种颜色对应的编号
-Plugin 'guns/xterm-color-table.vim'
+"Plugin 'guns/xterm-color-table.vim'
 
 " ============================================================================
 " Install plugins the first time vim runs  在安装Vundle后只运行一次
@@ -407,25 +420,23 @@ colorscheme lucius
 set wildmenu
 set wildmode=full
 
-if(g:iswindows==0)
-    " better backup, swap and undos storage
-    set directory=~/.vim/dirs/tmp     " directory to place swap files in
-    set backup                        " make backup files
-    set backupdir=~/.vim/dirs/backups " where to put backup files
-    set undofile                      " persistent undos - undo after you re-open the file
-    set undodir=~/.vim/dirs/undos
-    set viminfo+=n~/.vim/dirs/viminfo
+" better backup, swap and undos storage
+set directory=~/.vim/dirs/tmp     " directory to place swap files in
+set backup                        " make backup files
+set backupdir=~/.vim/dirs/backups " where to put backup files
+set undofile                      " persistent undos - undo after you re-open the file
+set undodir=~/.vim/dirs/undos
+set viminfo+=n~/.vim/dirs/viminfo
 
-    " create needed directories if they don't exist
-    if !isdirectory(&backupdir)
-        call mkdir(&backupdir, "p")
-    endif
-    if !isdirectory(&directory)
-        call mkdir(&directory, "p")
-    endif
-    if !isdirectory(&undodir)
-        call mkdir(&undodir, "p")
-    endif
+" create needed directories if they don't exist
+if !isdirectory(&backupdir)
+    call mkdir(&backupdir, "p")
+endif
+if !isdirectory(&directory)
+    call mkdir(&directory, "p")
+endif
+if !isdirectory(&undodir)
+    call mkdir(&undodir, "p")
 endif
 
 " ============================================================================
@@ -475,8 +486,8 @@ nmap <Leader>dd :Dox<CR>
 " toggle tagbar display 打开 Tag 列表
 map <F4> :TagbarToggle<CR>
 " autofocus on tagbar open
-let g:tagbar_autofocus = 1
-let g:tagbar_width = 35
+"let g:tagbar_autofocus = 1
+let g:tagbar_width = 30
 
 
 " NERDTree ----------------------------- 
@@ -485,7 +496,7 @@ map <F3> :NERDTreeToggle<CR>
 " open nerdtree with the current file selected 打开 NERDTree 并选中当前文件
 nmap ,t :NERDTreeFind<CR>
 " don;t show these file types  过滤文件和文件夹的显示
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$']
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$', 'cscope.file', 'cscope.out', 'tag']
 " 设置宽度
 let NERDTreeWinSize=25
 " 排序
@@ -499,11 +510,11 @@ let NERDTreeShowFiles=1
 "let NERDTreeShowHidden=1                "默认显示隐藏文件
 "let NERDTreeShowLineNumbers=1           "默认显示行号
 "let NERDTreeWinPos='right'              "将 NERDTree 的窗口设置在 vim 窗口的右侧，默认在左
-let NERDChristmasTree=1                 "让树更好看
+"let NERDChristmasTree=1                 "让树更好看
 
 if(g:iswindows)
     "在 vim 启动的时候默认开启 NERDTree（autocmd 可以缩写为 au）
-    autocmd VimEnter * NERDTree
+    "autocmd VimEnter * NERDTree
 endif
 
 " Tasklist ------------------------------
@@ -553,41 +564,39 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 
-if(g:iswindows)
-	" Syntastic ------------------------------
-	" show list of errors and warnings on the current file
-	nmap <leader>e :Errors<CR>
-	" turn to next or previous errors, after open errors list
-	nmap <leader>n :lnext<CR>
-	nmap <leader>p :lprevious<CR>
-	" check also when just opened the file
-	let g:syntastic_check_on_open = 1
-	let g:syntastic_enable_highlighting = 1
-	let g:syntastic_check_on_wq = 0
-	let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
-	let g:syntastic_javascript_checkers = ['jsl', 'jshint']
-	let g:syntastic_html_checkers=['tidy', 'jshint']
-	" to see error location list
-	let g:syntastic_always_populate_loc_list = 0
-	let g:syntastic_auto_loc_list = 0
-	let g:syntastic_loc_list_height = 5
-	" 修改高亮的背景色, 适应主题
-	highlight SyntasticErrorSign guifg=white guibg=black
-	" don't put icons on the sign column (it hides the vcs status icons of signify)
-	let g:syntastic_enable_signs = 0
+"" Syntastic ------------------------------
+"" show list of errors and warnings on the current file
+"nmap <leader>e :Errors<CR>
+"" turn to next or previous errors, after open errors list
+"nmap <leader>n :lnext<CR>
+"nmap <leader>p :lprevious<CR>
+"" check also when just opened the file
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_enable_highlighting = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
+"let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+"let g:syntastic_html_checkers=['tidy', 'jshint']
+"" to see error location list
+"let g:syntastic_always_populate_loc_list = 0
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_loc_list_height = 5
+"" 修改高亮的背景色, 适应主题
+"highlight SyntasticErrorSign guifg=white guibg=black
+"" don't put icons on the sign column (it hides the vcs status icons of signify)
+"let g:syntastic_enable_signs = 0
 
-	let g:syntastic_error_symbol = '✗'
-	let g:syntastic_warning_symbol = '⚠'
-	let g:syntastic_style_error_symbol = '✗'
-	let g:syntastic_style_warning_symbol = '⚠'
+"let g:syntastic_error_symbol = '✗'
+"let g:syntastic_warning_symbol = '⚠'
+"let g:syntastic_style_error_symbol = '✗'
+"let g:syntastic_style_warning_symbol = '⚠'
 
-	let g:syntastic_cpp_include_dirs = ['/usr/include/']
-	let g:syntastic_cpp_remove_include_errors = 1
-	let g:syntastic_cpp_check_header = 1
-	let g:syntastic_cpp_compiler = 'clang++'
-	let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
-	let g:syntastic_enable_balloons = 1 "whether to show balloons
-endif
+"let g:syntastic_cpp_include_dirs = ['/usr/include/']
+"let g:syntastic_cpp_remove_include_errors = 1
+"let g:syntastic_cpp_check_header = 1
+"let g:syntastic_cpp_compiler = 'clang++'
+"let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
+"let g:syntastic_enable_balloons = 1 "whether to show balloons
 
 
 " Python-mode ------------------------------
@@ -606,58 +615,56 @@ endif
 "nmap ,o :RopeFindOccurrences<CR>
 
 
-if(g:iswindows)
-	" NeoComplCache ------------------------------
-	" most of them not documented because I'm not sure how they work
-	" (docs aren't good, had to do a lot of trial and error to make 
-	" it play nice)
-	" Disable AutoComplPop.
-	let g:acp_enableAtStartup = 0
-	" Use neocomplcache.
-	" 在系统启动的时候启动neocomplcache
-	"let g:neocomplcache_enable_at_startup = 1
-	"let g:neocomplcache_enable_ignore_case = 1
-	" Use smartcase.
-	"let g:neocomplcache_enable_smart_case = 1
-	" 提示的时候默认选择地一个，如果你设置为0，每次输入都需要用上下键选择
-	let g:neocomplcache_enable_auto_select = 1
-	" 设置NeoComplCache不自动弹出补全列表
-	let g:NeoComplCache_DisableAutoComplete = 1
-	"let g:neocomplcache_enable_fuzzy_completion = 1
-	"let g:neocomplcache_enable_camel_case_completion = 1
-	"let g:neocomplcache_enable_underbar_completion = 1
-	"let g:neocomplcache_fuzzy_completion_start_length = 1
-	"let g:neocomplcache_auto_completion_start_length = 1
-	"let g:neocomplcache_manual_completion_start_length = 1
-	" Set minimum syntax keyword length.
-	let g:neocomplcache_min_keyword_length = 3
-	let g:neocomplcache_min_syntax_length = 3
-	let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-	" complete with workds from any opened file
-	let g:neocomplcache_same_filetype_lists = {}
-	let g:neocomplcache_same_filetype_lists._ = '_'
-	" <TAB>: completion.
-	inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-	" Define keyword.
-	if !exists('g:neocomplcache_keyword_patterns')
-	    let g:neocomplcache_keyword_patterns = {}
-	endif
-	let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-	" Plugin key-mappings.
-	" 取消补全
-	inoremap <expr><C-g>     neocomplcache#undo_completion()
-	" 完成待补全项中共同的字符串
-	inoremap <expr><C-l>     neocomplcache#complete_common_string()
-	" <C-h>, <BS>: close popup and delete backword char.
-	" 关闭待选项
-	inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-	" 关闭待选项
-	inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-	" 关闭待选项
-	inoremap <expr><C-y>  neocomplcache#close_popup()
-	" 退出待选项
-	inoremap <expr><C-e>  neocomplcache#cancel_popup()
-endif
+"" NeoComplCache ------------------------------
+"" most of them not documented because I'm not sure how they work
+"" (docs aren't good, had to do a lot of trial and error to make 
+"" it play nice)
+"" Disable AutoComplPop.
+"let g:acp_enableAtStartup = 0
+"" Use neocomplcache.
+"" 在系统启动的时候启动neocomplcache
+""let g:neocomplcache_enable_at_startup = 1
+""let g:neocomplcache_enable_ignore_case = 1
+"" Use smartcase.
+""let g:neocomplcache_enable_smart_case = 1
+"" 提示的时候默认选择地一个，如果你设置为0，每次输入都需要用上下键选择
+"let g:neocomplcache_enable_auto_select = 1
+"" 设置NeoComplCache不自动弹出补全列表
+"let g:NeoComplCache_DisableAutoComplete = 1
+""let g:neocomplcache_enable_fuzzy_completion = 1
+""let g:neocomplcache_enable_camel_case_completion = 1
+""let g:neocomplcache_enable_underbar_completion = 1
+""let g:neocomplcache_fuzzy_completion_start_length = 1
+""let g:neocomplcache_auto_completion_start_length = 1
+""let g:neocomplcache_manual_completion_start_length = 1
+"" Set minimum syntax keyword length.
+"let g:neocomplcache_min_keyword_length = 3
+"let g:neocomplcache_min_syntax_length = 3
+"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+"" complete with workds from any opened file
+"let g:neocomplcache_same_filetype_lists = {}
+"let g:neocomplcache_same_filetype_lists._ = '_'
+"" <TAB>: completion.
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"" Define keyword.
+"if !exists('g:neocomplcache_keyword_patterns')
+"    let g:neocomplcache_keyword_patterns = {}
+"endif
+"let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+"" Plugin key-mappings.
+"" 取消补全
+"inoremap <expr><C-g>     neocomplcache#undo_completion()
+"" 完成待补全项中共同的字符串
+"inoremap <expr><C-l>     neocomplcache#complete_common_string()
+"" <C-h>, <BS>: close popup and delete backword char.
+"" 关闭待选项
+"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+"" 关闭待选项
+"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+"" 关闭待选项
+"inoremap <expr><C-y>  neocomplcache#close_popup()
+"" 退出待选项
+"inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 
 " TabMan ------------------------------
@@ -667,23 +674,22 @@ let g:tabman_toggle = 'tl'
 " 将光标移动到tab管理窗口
 let g:tabman_focus  = 'tf'
 
-"""""""""""""""""""""""""""""""""""""""""""minibufexpl"""""""""""""""""""""""""""""""""""""""""""""
-"多文档编辑  minibufexpl.vim
-let g:miniBufExplMapCTabSwitchBufs=1        "启用以下两个功能：Ctrl+tab移到下一个buffer并在当前窗口打开；Ctrl+Shift+tab移到上一个buffer并在当前窗口打开
-let g:miniBufExplMapWindowsNavVim=1         "按下Ctrl+h/j/k/l，可以切换到当前窗口的上下左右窗口
-let g:miniBufExplMapWindowNavArrows=1       "按下Ctrl+箭头，可以切换到当前窗口的上下左右窗口
-"let g:miniBufExplMapCTabSwitchWindows=1    "启用以下两个功能：Ctrl+tab移到下一个窗口；Ctrl+Shift+tab移到上一个窗口；
-let g:miniBufExplModSelTarget=1             "不要在不可编辑内容的窗口（如TagList窗口）中打开选中的buffer
-let g:miniBufExplorerMoreThanOne=0			"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""minibufexpl"""""""""""""""""""""""""""""""""""""""""""""
+""多文档编辑  minibufexpl.vim
+"let g:miniBufExplMapCTabSwitchBufs=1        "启用以下两个功能：Ctrl+tab移到下一个buffer并在当前窗口打开；Ctrl+Shift+tab移到上一个buffer并在当前窗口打开
+"let g:miniBufExplMapWindowsNavVim=1         "按下Ctrl+h/j/k/l，可以切换到当前窗口的上下左右窗口
+"let g:miniBufExplMapWindowNavArrows=1       "按下Ctrl+箭头，可以切换到当前窗口的上下左右窗口
+""let g:miniBufExplMapCTabSwitchWindows=1    "启用以下两个功能：Ctrl+tab移到下一个窗口；Ctrl+Shift+tab移到上一个窗口；
+"let g:miniBufExplModSelTarget=1             "不要在不可编辑内容的窗口（如TagList窗口）中打开选中的buffer
+"let g:miniBufExplorerMoreThanOne=0			"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Signify ------------------------------
 " this first setting decides in which order try to guess your current vcs
 " UPDATE it to reflect your preferences, it will speed up opening files
- let g:signify_vcs_list = [ 'git', 'hg', 'svn']
+let g:signify_vcs_list = [ 'git', 'hg']
 
-let g:signify_vcs_cmds = {
-    \ 'svn': '"C:\Program Files\TortoiseSVN\bin\TortoiseMerge.exe" diff --diff-cmd %d -x -U0 -- %f'
+"let g:signify_vcs_cmds = {
     \ }
 
 " mappings to jump to changed blocks
@@ -721,32 +727,48 @@ let g:choosewin_overlay_enable = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'luna'
 "let g:airline_theme = 'bubblegum'
+"打开tabline功能,方便查看Buffer和切换,省去了minibufexpl插件
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-"let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" 关闭状态显示空白符号计数
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+
+"这个是安装字体后 必须设置此项" 
+let g:airline_powerline_fonts = 1
+
+if(g:iswindows)
+    " 设置consolas字体
+    set guifont=Consolas\ for\ Powerline\ FixedD:h10
+endif
+
+"设置切换Buffer快捷键"
+ nnoremap <C-tab> :bn<CR>
+ nnoremap <C-s-tab> :bp<CR>
 
 " to use fancy symbols for airline, uncomment the following lines and use a
 " patched font (more info on the README.rst)
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
 endif
-" let g:airline_left_sep = '⮀'
-" let g:airline_left_alt_sep = '⮁'
-" let g:airline_right_sep = '⮂'
-" let g:airline_right_alt_sep = '⮃'
-" let g:airline_symbols.branch = '⭠'
-" let g:airline_symbols.readonly = '⭤'
-" let g:airline_symbols.linenr = '⭡'
+let g:airline_left_sep = '>'
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ''
 
 " new file set title and turn to endline 自动插入头部
 autocmd BufNewFile *.sh,*.py,*.rb exec ":call SetTitle()"
@@ -898,34 +920,33 @@ endfunction
 "更新TAG
 map <F12> :call Do_CsTag()<CR><CR>
 
-nmap <silent><F6> :Grep <c-r><c-w> * -r <CR>
-
 filetype  on
 
 " 取消高亮
 nmap <leader>nh :nohl<CR>
-
-"用来改变终端下光标颜色
-let color_normal = 'HotPink'
-let color_insert = 'RoyalBlue1'
-let color_exit = 'green'
-if &term =~ 'xterm\|rxvt'
-    exe 'silent !echo -ne "\e]12;"' . shellescape(color_normal, 1) . '"\007"'
-    let &t_SI="\e]12;" . color_insert . "\007"
-    let &t_EI="\e]12;" . color_normal . "\007"
-    exe 'autocmd VimLeave * :!echo -ne "\e]12;"' . shellescape(color_exit, 1) . '"\007"'
-elseif &term =~ "screen"
-    if !exists('$SUDO_UID')
-        if exists('$TMUX')
-            exe 'silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
-            let &t_SI="\033Ptmux;\033\e]12;" . color_insert . "\007\033\\"
-            let &t_EI="\033Ptmux;\033\e]12;" . color_normal . "\007\033\\"
-            exe 'autocmd VimLeave * :!echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
-        else
-            exe 'silent !echo -ne "\033P\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
-            let &t_SI="\033P\e]12;" . color_insert . "\007\033\\"
-            let &t_EI="\033P\e]12;" . color_normal . "\007\033\\"
-            exe 'autocmd VimLeave * :!echo -ne "\033P\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
+if(g:iswindows==0)
+    "用来改变终端下光标颜色
+    let color_normal = 'HotPink'
+    let color_insert = 'RoyalBlue1'
+    let color_exit = 'green'
+    if &term =~ 'xterm\|rxvt'
+        exe 'silent !echo -ne "\e]12;"' . shellescape(color_normal, 1) . '"\007"'
+        let &t_SI="\e]12;" . color_insert . "\007"
+        let &t_EI="\e]12;" . color_normal . "\007"
+        exe 'autocmd VimLeave * :!echo -ne "\e]12;"' . shellescape(color_exit, 1) . '"\007"'
+    elseif &term =~ "screen"
+        if !exists('$SUDO_UID')
+            if exists('$TMUX')
+                exe 'silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
+                let &t_SI="\033Ptmux;\033\e]12;" . color_insert . "\007\033\\"
+                let &t_EI="\033Ptmux;\033\e]12;" . color_normal . "\007\033\\"
+                exe 'autocmd VimLeave * :!echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
+            else
+                exe 'silent !echo -ne "\033P\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
+                let &t_SI="\033P\e]12;" . color_insert . "\007\033\\"
+                let &t_EI="\033P\e]12;" . color_normal . "\007\033\\"
+                exe 'autocmd VimLeave * :!echo -ne "\033P\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
+            endif
         endif
     endif
 endif
