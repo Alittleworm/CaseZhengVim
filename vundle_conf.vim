@@ -20,11 +20,8 @@ endif
 " 侦测文件类型 关闭
 filetype off
 
-if(g:iswindows)
-	set rtp+=C:/MyProgramFiles/Vim/vimfiles/bundle/Vundle/ 
-else
-	set rtp+=~/.vim/bundle/Vundle/ 
-endif
+
+set rtp+=~/.vim/bundle/Vundle/ 
 
 call vundle#rc()
 
@@ -221,38 +218,10 @@ command! -nargs=1 RecurGrepFast silent exec 'lgrep! <q-args> ./**/*.*' | lopen
 "     colorscheme wombat
 " endif
 
-" 设置背景颜色
-set background=dark
-syntax enable
-"colorscheme solarized
-"colorscheme wombat
-"colorscheme molokai
-"colorscheme delek
-colorscheme lucius
-
 " autocompletion of files and commands behaves like zsh
 " (autocomplete menu)
 set wildmenu
 set wildmode=full
-
-" better backup, swap and undos storage
-set directory=~/.vim/dirs/tmp     " directory to place swap files in
-set backup                        " make backup files
-set backupdir=~/.vim/dirs/backups " where to put backup files
-set undofile                      " persistent undos - undo after you re-open the file
-set undodir=~/.vim/dirs/undos
-set viminfo+=n~/.vim/dirs/viminfo
-
-" create needed directories if they don't exist
-if !isdirectory(&backupdir)
-    call mkdir(&backupdir, "p")
-endif
-if !isdirectory(&directory)
-    call mkdir(&directory, "p")
-endif
-if !isdirectory(&undodir)
-    call mkdir(&undodir, "p")
-endif
 
 " ============================================================================
 " Plugins settings and mappings

@@ -6,10 +6,11 @@ else
 endif
 
 if(g:iswindows)
-	let $vimpath = "C:/MyProgramFiles/Vim/"
-	let $vimrcpath = $vimpath."vimfiles/.vimrc"
+	let $vimpath = "~/.vim/"
+	let $vimrcpath = $vimpath."myvimrc.vim"
 	let $PATH_OLD = $PATH
-	let $PATH = $PATH_OLD.";".$vimpath."vimfiles/exec/"
+	let $HOMEPATH = "C:/Users/CaseZheng/"
+	let $PATH = $PATH_OLD.";".$HOMEPATH.".vim/exec/"
 else
 	let $vimpath = "~/"
 	let $vimrcpath = $vimpath.".vim/myvimrc.vim"

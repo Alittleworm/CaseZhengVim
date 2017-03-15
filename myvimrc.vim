@@ -174,6 +174,35 @@ set showcmd
 " 命令行显示vim当前模
 set showmode
 
+
+" 设置背景颜色
+set background=dark
+syntax enable
+"colorscheme solarized
+"colorscheme wombat
+"colorscheme molokai
+colorscheme delek
+"colorscheme lucius
+
+" better backup, swap and undos storage
+set directory=~/.vim/dirs/tmp     " directory to place swap files in
+set backup                        " make backup files
+set backupdir=~/.vim/dirs/backups " where to put backup files
+set undofile                      " persistent undos - undo after you re-open the file
+set undodir=~/.vim/dirs/undos
+set viminfo+=n~/.vim/dirs/viminfo
+
+" create needed directories if they don't exist
+if !isdirectory(&backupdir)
+    call mkdir(&backupdir, "p")
+endif
+if !isdirectory(&directory)
+    call mkdir(&directory, "p")
+endif
+if !isdirectory(&undodir)
+    call mkdir(&undodir, "p")
+endif
+
 set t_Co=256  
 
 " 取消高亮
@@ -206,4 +235,4 @@ if(g:iswindows==0)
     endif
 endif
 
-source ./vundle_conf.vim
+source ~/.vim/vundle_conf.vim
