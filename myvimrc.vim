@@ -181,8 +181,8 @@ syntax enable
 "colorscheme solarized
 "colorscheme wombat
 "colorscheme molokai
-colorscheme delek
-"colorscheme lucius
+"colorscheme delek
+colorscheme lucius
 
 " better backup, swap and undos storage
 set directory=~/.vim/dirs/tmp     " directory to place swap files in
@@ -233,6 +233,9 @@ if(g:iswindows==0)
             endif
         endif
     endif
+    unlet color_normal
+    unlet color_insert
+    unlet color_exit
 endif
 
 source ~/.vim/vundle_conf.vim

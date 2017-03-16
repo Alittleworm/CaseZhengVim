@@ -713,7 +713,3 @@ if(executable('cscope') && has("cscope") )
     endif
 endif
 :redr!
-
-unlet color_normal
-unlet color_insert
-unlet color_exit
