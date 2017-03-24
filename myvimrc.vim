@@ -115,8 +115,8 @@ set backspace=2
 set backspace=indent,eol,start
 
 " auto open or close NERDTree
-autocmd vimenter * if !argc() | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"autocmd vimenter * if !argc() | NERDTree | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " always show status bar
 " 总显示最后一个窗口的状态行；设为1则窗口数多于一个的时候
