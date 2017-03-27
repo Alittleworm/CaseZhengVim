@@ -705,6 +705,8 @@ endfunction
 "更新TAG
 map <F12> :call Do_CsTag()<CR><CR>
 
+let g:proj_flags="icmSt"
+
 filetype  on
 
 if(executable('cscope') && has("cscope") )
