@@ -279,6 +279,7 @@ let g:tagbar_width = 30
 " NERDTree ----------------------------- 
 " toggle nerdtree display  打开/关闭 NERDTree
 map <F3> :NERDTreeToggle<CR>
+map <F2> :NERDTree<CR>
 " open nerdtree with the current file selected 打开 NERDTree 并选中当前文件
 nmap ,t :NERDTreeFind<CR>
 " don;t show these file types  过滤文件和文件夹的显示
@@ -309,7 +310,7 @@ map <F11> :TaskList<CR>
 
 
 " A ---------------------------------
-map <F2> :A<CR>
+map <F6> :A<CR>
 
 
 " CtrlP ------------------------------
