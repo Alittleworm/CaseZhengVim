@@ -114,6 +114,8 @@ Bundle 'omnicppcomplete'
 Plugin 'fatih/vim-go'
 " 代码对齐插件
 Plugin 'godlygeek/tabular'
+" markdown语法高亮
+Plugin 'plasticboy/vim-markdown'
 
 " Search results counter
 Plugin 'IndexedSearch'
@@ -703,9 +705,17 @@ function Do_CsTag()
 endfunction
 
 "更新TAG
-map <F12> :call Do_CsTag()<CR><CR>
+map <F10> :call Do_CsTag()<CR><CR>
 
-let g:proj_flags="icmSt"
+" project
+" i 设置后，当选择打开一个文件时会在命令行显示文件名和当前工作路径。
+" c 设置后，在项目窗口中打开文件后会自动关闭项目窗口。
+" m 在常规模式下开启 |CTRL-W_o| 和 |CTRL-W_CTRL_O| 映射，使得当前缓冲区成为唯一可见的缓冲区，但是项目窗口仍然可见。
+" s 设置后将在项目窗口中使用语法高亮。
+" S 设置后将在更新和创建项目时启用排序。
+" g 设置后会将切换打开和关闭项目窗口映射到 <F12> 上。
+" t 设置后将在按空格 <space> 或鼠标右击 <RightMouse> 时候进行原窗口和加宽窗口之间的切换。
+let g:proj_flags="icmStg"
 
 filetype  on
 
