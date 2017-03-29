@@ -3,7 +3,7 @@
 " Setting up Vundle - the best vim plugin manager  如果Vundle不存在则clone一个
 let iCanHazVundle=1
 if(g:iswindows)
-	let vundle_readme=expand('$vimpath/vimfiles/bundle/Vundle/README.md')
+	let vundle_readme=expand('$vimpath/bundle/Vundle/README.md')
 else
 	let vundle_readme=$vimpath.'.vim/bundle/Vundle/README.md'
 endif
@@ -474,10 +474,11 @@ let g:tabman_focus  = 'tf'
 " Signify ------------------------------
 " this first setting decides in which order try to guess your current vcs
 " UPDATE it to reflect your preferences, it will speed up opening files
-let g:signify_vcs_list = [ 'git', 'hg']
+let g:signify_vcs_list = [ 'git']
 
+    let g:signify_difftool = 'gnudiff'
 "let g:signify_vcs_cmds = {
-    \ }
+"    \ }
 
 " mappings to jump to changed blocks
  nmap <leader>sn <plug>(signify-next-hunk)
@@ -529,7 +530,7 @@ let g:airline_powerline_fonts = 1
 
 if(g:iswindows)
     " 设置consolas字体
-    set guifont=Consolas\ for\ Powerline\ FixedD:h10
+    set guifont=Consolas\ for\ Powerline\ FixedD:h9
 endif
 
 "设置切换Buffer快捷键"
