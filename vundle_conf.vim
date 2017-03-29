@@ -527,7 +527,7 @@ let g:airline_powerline_fonts = 1
 
 if(g:iswindows)
     " 设置consolas字体
-    set guifont=Consolas\ for\ Powerline\ FixedD:h10
+    set guifont=Consolas\ for\ Powerline\ FixedD:h9
 endif
 
 "设置切换Buffer快捷键"
