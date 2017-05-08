@@ -20,43 +20,39 @@ endif
 " 侦测文件类型 关闭
 filetype off
 
-
 set rtp+=~/.vim/bundle/Vundle/ 
 
 call vundle#rc()
 
-" let Vundle manage Plugins
+" 插件管理插件
 Plugin 'gmarik/Vundle'
 
 " ============================================================================
-" Active plugins
-" You can disable or add new ones here:
-
-" Plugins from github repos:
-
-" Better file browser
+" vim 树形目录插件
 Plugin 'scrooloose/nerdtree'
 
-" Code commenter 快速注释/解开注释
+" 快速注释/解开注释
 Plugin 'scrooloose/nerdcommenter'
 
 " 注释快速生成
 Plugin 'DoxygenToolkit.vim'
 
-" Class/module browser
+" Vim 标签侧边栏插件
 Plugin 'majutsushi/tagbar'
 
-" Code and files fuzzy finder 模糊搜索, 可以搜索文件/buffer/mru/tag等等
+" 模糊搜索, 可以搜索文件/buffer/mru/tag等等
 Plugin 'kien/ctrlp.vim'
-
 " Extension to ctrlp, for fuzzy command finder
 Plugin 'fisadev/vim-ctrlp-cmdpalette'
 
-" Maybe the best Git integration 处理 git merge 文件冲突
+" 处理 git merge 文件冲突
 Plugin 'tpope/vim-fugitive'
 
-" Tab list panel   Tab管理
+" tab管理
 Plugin 'kien/tabman.vim'
+
+" 窗口管理器
+Plugin 't9md/vim-choosewin'
 
 " Airline 状态栏
 Plugin 'vim-airline/vim-airline'
@@ -65,44 +61,37 @@ if(g:iswindows)
     Plugin 'eugeii/consolas-powerline-vim'
 endif
 
-" Pending tasks list
-"Plugin 'fisadev/FixedTaskList.vim'
-
 "让cpp文件在.h和.cpp文件中切换
 Bundle 'vim-scripts/a.vim'
 
-" Python mode (indentation, doc, refactor, lints, code checking, motion and
-" operators, highlighting, run and ipdb breakpoints)
 "Plugin 'klen/python-mode'
 
 "if(g:iswindows==1)
-"    " Better autocompletion
-"    Plugin 'Shougo/neocomplcache.vim'
+"    "vim 自动补全插件
+    Plugin 'Shougo/neocomplcache.vim'
 "endif
 
 if(g:iswindows==0)
-    Bundle 'Valloric/YouCompleteMe'
+"    Bundle 'Valloric/YouCompleteMe'
 endif
 
-" Snippets manager (SnipMate), dependencies, and snippets repo
+" snipMate 依赖组件
 Plugin 'MarcWeber/vim-addon-mw-utils'
+" snipMate 依赖组件
 Plugin 'tomtom/tlib_vim'
-Plugin 'honza/vim-snippets'
+" 使 Vim 具有 TextMate 风格的 snippets 功能
 Plugin 'garbas/vim-snipmate'
-" Git/mercurial/others diff icons on the side of the file lines
+
+" 代码片段补全 
+Plugin 'honza/vim-snippets'
+
 " 同时支持Git 和 Svn ，速度也是相当不错的，高亮当前修改.　比较全面的一个插件
 Plugin 'mhinz/vim-signify'
-" Automatically sort python imports
 "Plugin 'fisadev/vim-isort'
-" Window chooser 窗口管理器
-Plugin 't9md/vim-choosewin'
 
 "onmicppcompete功能：
-"命名空间(namespace),类(class),结构(struct)和联合(union)补全
-"函数属性成员和返回值类型补全
-"this"指针成员补全
-"C/C++类型转换(cast)对象补全
-"类型定义(typedef)和匿名类型(anonymous types)补全
+"命名空间(namespace),类(class),结构(struct)和联合(union)补全 函数属性成员和返回值类型补全 this指针成员补全
+"C/C++类型转换(cast)对象补全 类型定义和匿名类型补全
 Bundle 'omnicppcomplete'
 
 "if(g:iswindows)
@@ -110,10 +99,9 @@ Bundle 'omnicppcomplete'
 "    Plugin 'scrooloose/syntastic'
 "endif
 
-" Golang Plugins
-Plugin 'fatih/vim-go'
 " 代码对齐插件
 Plugin 'godlygeek/tabular'
+
 " markdown语法高亮
 Plugin 'plasticboy/vim-markdown'
 
@@ -124,28 +112,19 @@ Plugin 'IndexedSearch'
 Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'xolox/vim-misc'
 
-" 多窗口插件 airline有这个功能  屏蔽啦
-"Plugin 'minibufexplorerpp'
-
 " Grep
-"Plugin 'yegappan/grep'
+Plugin 'yegappan/grep'
 
-"Plugin 'WolfgangMehner/lua-support'
-
-" Gvim colorscheme
+" 配色方案
 Plugin 'Wombat'
-
-" awesome colorscheme
 Plugin 'tomasr/molokai'
-
-" solarized colorscheme
 Plugin 'altercation/vim-colors-solarized'
 
 " 显示终端的各种颜色对应的编号
 "Plugin 'guns/xterm-color-table.vim'
 
 " ============================================================================
-" Install plugins the first time vim runs  在安装Vundle后只运行一次
+" 在安装Vundle后只运行一次
 
 if (iCanHazVundle==0)
     echo "Installing Plugins, please ignore key map error messages"
@@ -153,7 +132,7 @@ if (iCanHazVundle==0)
     :PluginInstall
 endif
 
-" tab navigation mappings
+""""""""""""""""""""""""""""""""""""""""""""tab 管理"""""""""""""""""""""""""
 " 后一个
 map tn :tabn<CR>
 " 前一个
@@ -167,10 +146,7 @@ map to :tabo<CR>
 map tt :tabnew
 " 查看所有打开的tab
 map ts :tabs
-map <C-S-Right> :tabn<CR>
-imap <C-S-Right> <ESC>:tabn<CR>
-map <C-S-Left> :tabp<CR>
-imap <C-S-Left> <ESC>:tabp<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " navigate windows with meta+arrows
 map <M-Right> <c-w>l
@@ -182,12 +158,9 @@ imap <M-Left> <ESC><c-w>h
 imap <M-Up> <ESC><c-w>k
 imap <M-Down> <ESC><c-w>j
 
-" old autocomplete keyboard shortcut
+" 自动补全映射
 imap <C-J> <C-X><C-O>
 
-" Comment this line to enable autocompletion preview window
-" (displays documentation related to the selected completion option)
-" Disabled by default because preview makes the window flicker
 set completeopt-=preview
 set completeopt=menuone,menu,longest 
 
@@ -225,11 +198,7 @@ command! -nargs=1 RecurGrepFast silent exec 'lgrep! <q-args> ./**/*.*' | lopen
 set wildmenu
 set wildmode=full
 
-" ============================================================================
-" Plugins settings and mappings
-" Edit them as you wish.
-
-" nerdcommenter ----------------------
+"------------------------------------------- nerdcommenter ----------------------
 "1、 \cc 注释当前行和选中行  
 "2、 \cn 没有发现和\cc有区别  
 "3、 \c<空格> 如果被选区域有部分被注释，则对被选区域执行取消注释操作，其它情况执行反转注释操作  
@@ -243,11 +212,12 @@ set wildmode=full
 "11、\cl \cb 左对齐和左右对其，左右对其主要针对/**/  
 "12、\cu 取消注释 
 "命令 \cc 中的 \ 为<Leader>符，<Leader>符默认为 \ 
+"------------------------------------------- nerdcommenter ----------------------
 
 
-" DoxygenToolkit ---------------------
+
+"""""""""""""""""""""""""""""""""""""""" 注释 DoxygenToolkit""""""""""""""""
 let g:DoxygenToolkit_briefTag_funcName = "yes"
-
 "let g:DoxygenToolkit_commentType = "C++"
 let g:DoxygenToolkit_briefTag_pre = "Synopsis: "            "简介
 let g:DoxygenToolkit_templateParamTag_pre = "TTaram: "
@@ -267,23 +237,26 @@ let g:load_doxygen_syntax = 1
 nmap <Leader>dl :DoxAuthor<CR>
 "函数/类注释
 nmap <Leader>dd :Dox<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Tagbar ----------------------------- 
+
+"""""""""""""""""""""""""""""""""""""""" Tagbar """"""""""""""""""""""""""" 
 " toggle tagbar display 打开 Tag 列表
 map <F4> :TagbarToggle<CR>
-" autofocus on tagbar open
+" tagbar自动打开
 "let g:tagbar_autofocus = 1
 let g:tagbar_width = 30
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" NERDTree ----------------------------- 
-" toggle nerdtree display  打开/关闭 NERDTree
+"""""""""""""""""""""""""""""""""""" NERDTree """"""""""""""""""""""""""""""""""""
+" 打开/关闭 NERDTree
 map <F3> :NERDTreeToggle<CR>
 map <F2> :NERDTree<CR>
-" open nerdtree with the current file selected 打开 NERDTree 并选中当前文件
+" 打开 NERDTree 并选中当前文件
 nmap ,t :NERDTreeFind<CR>
-" don;t show these file types  过滤文件和文件夹的显示
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$', 'cscope.file', 'cscope.out', 'tag']
+" 过滤文件和文件夹的显示
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$', 'cscope.file', 'cscope.out', 'tag', '\.sln$', '\.vcxproj$', '\.filters$', '\.vcxproj\.user$']
 " 设置宽度
 let NERDTreeWinSize=25
 " 排序
@@ -297,23 +270,21 @@ let NERDTreeShowFiles=1
 "let NERDTreeShowHidden=1                "默认显示隐藏文件
 "let NERDTreeShowLineNumbers=1           "默认显示行号
 "let NERDTreeWinPos='right'              "将 NERDTree 的窗口设置在 vim 窗口的右侧，默认在左
-"let NERDChristmasTree=1                 "让树更好看
+let NERDChristmasTree=1                 "让树更好看
 
 if(g:iswindows)
     "在 vim 启动的时候默认开启 NERDTree（autocmd 可以缩写为 au）
     "autocmd VimEnter * NERDTree
 endif
-
-" Tasklist ------------------------------
-" show pending tasks list
-map <F11> :TaskList<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" A ---------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""" A """""""""""""""""""""""
 map <F6> :A<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""" A """""""""""""""""""""""
 
 
-" CtrlP ------------------------------
+"-------------------------------------- CtrlP ------------------------------
 " file finder mapping
 let g:ctrlp_map = ',p'
 " hidden some types files
@@ -349,6 +320,7 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|\.hg|\.svn)$',
   \ 'file': '\.pyc$\|\.pyo$',
   \ }
+"---------------------------------------------------------------------------
 
 
 "" Syntastic ------------------------------
@@ -402,81 +374,65 @@ let g:ctrlp_custom_ignore = {
 "nmap ,o :RopeFindOccurrences<CR>
 
 
-"" NeoComplCache ------------------------------
-"" most of them not documented because I'm not sure how they work
-"" (docs aren't good, had to do a lot of trial and error to make 
-"" it play nice)
-"" Disable AutoComplPop.
-"let g:acp_enableAtStartup = 0
-"" Use neocomplcache.
-"" 在系统启动的时候启动neocomplcache
-""let g:neocomplcache_enable_at_startup = 1
-""let g:neocomplcache_enable_ignore_case = 1
-"" Use smartcase.
-""let g:neocomplcache_enable_smart_case = 1
-"" 提示的时候默认选择地一个，如果你设置为0，每次输入都需要用上下键选择
-"let g:neocomplcache_enable_auto_select = 1
-"" 设置NeoComplCache不自动弹出补全列表
-"let g:NeoComplCache_DisableAutoComplete = 1
-""let g:neocomplcache_enable_fuzzy_completion = 1
-""let g:neocomplcache_enable_camel_case_completion = 1
-""let g:neocomplcache_enable_underbar_completion = 1
-""let g:neocomplcache_fuzzy_completion_start_length = 1
-""let g:neocomplcache_auto_completion_start_length = 1
-""let g:neocomplcache_manual_completion_start_length = 1
-"" Set minimum syntax keyword length.
-"let g:neocomplcache_min_keyword_length = 3
-"let g:neocomplcache_min_syntax_length = 3
-"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-"" complete with workds from any opened file
-"let g:neocomplcache_same_filetype_lists = {}
-"let g:neocomplcache_same_filetype_lists._ = '_'
-"" <TAB>: completion.
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"" Define keyword.
-"if !exists('g:neocomplcache_keyword_patterns')
-"    let g:neocomplcache_keyword_patterns = {}
-"endif
-"let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-"" Plugin key-mappings.
-"" 取消补全
-"inoremap <expr><C-g>     neocomplcache#undo_completion()
-"" 完成待补全项中共同的字符串
-"inoremap <expr><C-l>     neocomplcache#complete_common_string()
-"" <C-h>, <BS>: close popup and delete backword char.
-"" 关闭待选项
-"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-"" 关闭待选项
-"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-"" 关闭待选项
-"inoremap <expr><C-y>  neocomplcache#close_popup()
-"" 退出待选项
-"inoremap <expr><C-e>  neocomplcache#cancel_popup()
+"----------------------------- NeoComplCache ------------------------------
+let g:acp_enableAtStartup = 0
+" 在系统启动的时候启动neocomplcache
+"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_ignore_case = 1
+"let g:neocomplcache_enable_smart_case = 1
+" 提示的时候默认选择地一个，如果你设置为0，每次输入都需要用上下键选择
+let g:neocomplcache_enable_auto_select = 1
+" 设置NeoComplCache不自动弹出补全列表
+let g:NeoComplCache_DisableAutoComplete = 1
+"let g:neocomplcache_enable_fuzzy_completion = 1
+"let g:neocomplcache_enable_camel_case_completion = 1
+"let g:neocomplcache_enable_underbar_completion = 1
+"let g:neocomplcache_fuzzy_completion_start_length = 1
+"let g:neocomplcache_auto_completion_start_length = 1
+"let g:neocomplcache_manual_completion_start_length = 1
+let g:neocomplcache_min_keyword_length = 3
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+" complete with workds from any opened file
+let g:neocomplcache_same_filetype_lists = {}
+let g:neocomplcache_same_filetype_lists._ = '_'
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+" Plugin key-mappings.
+" 取消补全
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+" 完成待补全项中共同的字符串
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+" <C-h>, <BS>: close popup and delete backword char.
+" 关闭待选项
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+" 关闭待选项
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+" 关闭待选项
+inoremap <expr><C-y>  neocomplcache#close_popup()
+" 退出待选项
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+"----------------------------- NeoComplCache ------------------------------
 
 
-" TabMan ------------------------------
+"------------------------------------- TabMan ------------------------------
 " mappings to toggle display, and to focus on it
 " 开启/关闭 tab 管理
 let g:tabman_toggle = 'tl'
 " 将光标移动到tab管理窗口
 let g:tabman_focus  = 'tf'
+"------------------------------------- TabMan ------------------------------
 
-""""""""""""""""""""""""""""""""""""""""""""minibufexpl"""""""""""""""""""""""""""""""""""""""""""""
-""多文档编辑  minibufexpl.vim
-"let g:miniBufExplMapCTabSwitchBufs=1        "启用以下两个功能：Ctrl+tab移到下一个buffer并在当前窗口打开；Ctrl+Shift+tab移到上一个buffer并在当前窗口打开
-"let g:miniBufExplMapWindowsNavVim=1         "按下Ctrl+h/j/k/l，可以切换到当前窗口的上下左右窗口
-"let g:miniBufExplMapWindowNavArrows=1       "按下Ctrl+箭头，可以切换到当前窗口的上下左右窗口
-""let g:miniBufExplMapCTabSwitchWindows=1    "启用以下两个功能：Ctrl+tab移到下一个窗口；Ctrl+Shift+tab移到上一个窗口；
-"let g:miniBufExplModSelTarget=1             "不要在不可编辑内容的窗口（如TagList窗口）中打开选中的buffer
-"let g:miniBufExplorerMoreThanOne=0			"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Signify ------------------------------
+"------------------------------------ Signify ------------------------------
 " this first setting decides in which order try to guess your current vcs
 " UPDATE it to reflect your preferences, it will speed up opening files
 let g:signify_vcs_list = [ 'git']
 
-    let g:signify_difftool = 'gnudiff'
+let g:signify_difftool = 'gnudiff'
 "let g:signify_vcs_cmds = {
 "    \ }
 
@@ -490,10 +446,10 @@ highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
+"------------------------------------ Signify ------------------------------
 
 
-" Window Chooser ------------------------------
-" mapping
+"----------------------------- Window Chooser ------------------------------
 nmap  (  <Plug>(choosewin)
 " show big letters
 let g:choosewin_overlay_enable = 1
@@ -510,8 +466,9 @@ let g:choosewin_overlay_enable = 1
 " S   swap_stay   Swap windows but stay #1
 "     win_land    Navigate to current window
 "                 Disable predefined keymaping
+"----------------------------- Window Chooser ------------------------------
 
-" Airline ------------------------------
+"------------------------------------ Airline ------------------------------
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'luna'
 "let g:airline_theme = 'bubblegum'
@@ -533,12 +490,6 @@ if(g:iswindows)
     set guifont=Consolas\ for\ Powerline\ FixedD:h9
 endif
 
-"设置切换Buffer快捷键"
- nnoremap <C-tab> :bn<CR>
- nnoremap <C-s-tab> :bp<CR>
-
-" to use fancy symbols for airline, uncomment the following lines and use a
-" patched font (more info on the README.rst)
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
 endif
@@ -557,21 +508,8 @@ let g:airline_symbols.linenr = ''
 "let g:airline_symbols.branch = ''
 "let g:airline_symbols.readonly = ''
 "let g:airline_symbols.linenr = ''
+"------------------------------------ Airline ------------------------------
 
-" new file set title and turn to endline 自动插入头部
-autocmd BufNewFile *.sh,*.py,*.rb exec ":call SetTitle()"
-function SetTitle()
-    if &filetype == 'sh'
-        call setline(1,"\#!/bin/bash")
-        call append(line("."), "")
-
-    elseif &filetype == 'python'
-        call setline(1,"#!/usr/bin/env python")
-        call append(line("."),"# coding=utf-8")
-	    call append(line(".")+1, "") 
-    endif
-endfunction
-autocmd BufNewFile * normal G
 
 
 """""""""""""""""""""""""""""""""""""""""""""cscope""""""""""""""""""""""""""""""""""""""""""""""""
@@ -629,6 +567,16 @@ let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 
 "自动关闭补全窗口
 "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""vim-lua-ftplugin""""""""""""""""""""""""""""""""""""""
+" 自动语法检测 0表示关闭 运行:CheckSyntax手动进行语法检测
+let g:lua_check_syntax=0
+" 自动检查未定义的全局变量 0表示禁用 运行:CheckGlobals手动检测
+let g:lua_check_globals=0
+" 自动补全
+let g:lua_complete_omni=1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let $VIMPROJECT = $vimpath."vimfiles"
 if(g:iswindows==1)
@@ -705,10 +653,24 @@ function Do_CsTag()
     :redr!
 endfunction
 
+" 新建文件自动插入头部
+autocmd BufNewFile *.sh,*.py,*.rb exec ":call SetTitle()"
+function SetTitle()
+    if &filetype == 'sh'
+        call setline(1,"\#!/bin/bash")
+        call append(line("."), "")
+    elseif &filetype == 'python'
+        call setline(1,"#!/usr/bin/env python")
+        call append(line("."),"# coding=utf-8")
+	    call append(line(".")+1, "") 
+    endif
+endfunction
+autocmd BufNewFile * normal G
+
 "更新TAG
 map <F10> :call Do_CsTag()<CR><CR>
 
-" project
+"-------------------------------------- project ------------------------------
 " i 设置后，当选择打开一个文件时会在命令行显示文件名和当前工作路径。
 " c 设置后，在项目窗口中打开文件后会自动关闭项目窗口。
 " m 在常规模式下开启 |CTRL-W_o| 和 |CTRL-W_CTRL_O| 映射，使得当前缓冲区成为唯一可见的缓冲区，但是项目窗口仍然可见。
@@ -717,6 +679,7 @@ map <F10> :call Do_CsTag()<CR><CR>
 " g 设置后会将切换打开和关闭项目窗口映射到 <F12> 上。
 " t 设置后将在按空格 <space> 或鼠标右击 <RightMouse> 时候进行原窗口和加宽窗口之间的切换。
 let g:proj_flags="icmStg"
+"-------------------------------------- project ------------------------------
 
 filetype  on
 
