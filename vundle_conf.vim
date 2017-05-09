@@ -31,6 +31,9 @@ Plugin 'gmarik/Vundle'
 " vim 树形目录插件
 Plugin 'scrooloose/nerdtree'
 
+" c++高亮增强 C++11/14 STL
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
 " 快速注释/解开注释
 Plugin 'scrooloose/nerdcommenter'
 
@@ -115,6 +118,9 @@ Plugin 'xolox/vim-misc'
 " Grep
 Plugin 'yegappan/grep'
 
+" 代码对齐展示
+Plugin 'nathanaelkane/vim-indent-guides'
+
 " 配色方案
 Plugin 'Wombat'
 Plugin 'tomasr/molokai'
@@ -131,6 +137,17 @@ if (iCanHazVundle==0)
     echo ""
     :PluginInstall
 endif
+
+"--------------------------------------vim-indent-guides--------------------
+"" 随 vim 自启动
+let g:indent_guides_enable_on_vim_startup=1
+" 从第二层开始可视化显示缩进
+let g:indent_guides_start_level=2
+" 色块宽度
+let g:indent_guides_guide_size=1
+" 快捷键 i 开/关缩进可视化
+":nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+"--------------------------------------vim-indent-guides--------------------
 
 """"""""""""""""""""""""""""""""""""""""""""tab 管理"""""""""""""""""""""""""
 " 后一个
@@ -633,16 +650,16 @@ function Do_CsTag()
         endif
     endif
     if(executable('ctags'))
-         silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q ."
-"         silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q --langdef=MYLUA --langmap=MYLUA:.lua --regex-MYLUA="/^.*\s*function\s*(\w+):(\w+).*$/\2/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*[0-9]+.*$/\1/e/" --regex-MYLU A="/^.*\s*function\s*(\w+)\.(\w+).*$/\2/f/" --regex-MYLUA="/^.*\s*function\s*(\w+)\s*\(.*$/\1/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*\{.*$/\1/e/" --regex-MYLUA="/^\s*module\s+\"(\w+)\".*$/\1/m,module/" --regex-MYLUA="/^\s*module\s+\"[a-zA-Z0-9._]+\.(\w+)\".*$/\1/m,module/" --languages=MYLUA --excmd=number ."
+"        silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q ."
+         silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q --langdef=MYLUA --langmap=MYLUA:.lua --regex-MYLUA="/^.*\s*function\s*(\w+):(\w+).*$/\2/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*[0-9]+.*$/\1/e/" --regex-MYLU A="/^.*\s*function\s*(\w+)\.(\w+).*$/\2/f/" --regex-MYLUA="/^.*\s*function\s*(\w+)\s*\(.*$/\1/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*\{.*$/\1/e/" --regex-MYLUA="/^\s*module\s+\"(\w+)\".*$/\1/m,module/" --regex-MYLUA="/^\s*module\s+\"[a-zA-Z0-9._]+\.(\w+)\".*$/\1/m,module/" --languages=MYLUA --excmd=number ."
     else
         echohl WarningMsg | echo "Fail ctags" | echohl None
     endif
     if(executable('cscope') && has("cscope") )
         if(g:iswindows!=1)
-              silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+              silent! execute "!find . -name '*.h' -name '*.hpp' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
           else
-              silent! execute "!dir /s/b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+              silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hpp,*.java,*.cs >> cscope.files"
         endif
         silent! execute "!cscope -b"
         execute "normal :"

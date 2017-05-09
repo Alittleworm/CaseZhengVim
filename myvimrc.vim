@@ -182,7 +182,8 @@ syntax enable
 "colorscheme wombat
 "colorscheme molokai
 "colorscheme delek
-colorscheme lucius
+"colorscheme lucius
+colorscheme evening 
 
 " better backup, swap and undos storage
 set directory=~/.vim/dirs/tmp     " directory to place swap files in
