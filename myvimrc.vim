@@ -182,8 +182,11 @@ syntax enable
 "colorscheme wombat
 "colorscheme molokai
 "colorscheme delek
-"colorscheme lucius
-colorscheme evening 
+if(g:iswindows==0)
+    colorscheme lucius
+else
+    colorscheme evening 
+end
 
 " better backup, swap and undos storage
 set directory=~/.vim/dirs/tmp     " directory to place swap files in
