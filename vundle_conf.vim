@@ -179,7 +179,7 @@ imap <M-Up> <ESC><c-w>k
 imap <M-Down> <ESC><c-w>j
 
 " 自动补全映射
-imap <C-J> <C-X><C-O>
+"imap <C-J> <C-X><C-O>
 
 set completeopt-=preview
 set completeopt=menuone,menu,longest 
@@ -276,7 +276,7 @@ map <F2> :NERDTree<CR>
 " 打开 NERDTree 并选中当前文件
 nmap ,t :NERDTreeFind<CR>
 " 过滤文件和文件夹的显示
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$', 'cscope.file', 'cscope.out', 'tag', '\.sln$', '\.vcxproj$', '\.filters$', '\.vcxproj\.user$']
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$', 'cscope.file', 'cscope.out', 'tag', '\.sln$', '\.vcxproj$', '\.filters$', '\.vcxproj\.user$', '\.exe$']
 " 设置宽度
 let NERDTreeWinSize=25
 " 排序
@@ -397,13 +397,13 @@ let g:ctrlp_custom_ignore = {
 "----------------------------- NeoComplCache ------------------------------
 let g:acp_enableAtStartup = 0
 " 在系统启动的时候启动neocomplcache
-"let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_at_startup = 1
 "let g:neocomplcache_enable_ignore_case = 1
 "let g:neocomplcache_enable_smart_case = 1
 " 提示的时候默认选择地一个，如果你设置为0，每次输入都需要用上下键选择
 let g:neocomplcache_enable_auto_select = 1
 " 设置NeoComplCache不自动弹出补全列表
-let g:NeoComplCache_DisableAutoComplete = 1
+let g:NeoComplCache_DisableAutoComplete = 0
 "let g:neocomplcache_enable_fuzzy_completion = 1
 "let g:neocomplcache_enable_camel_case_completion = 1
 "let g:neocomplcache_enable_underbar_completion = 1
@@ -416,7 +416,7 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " complete with workds from any opened file
 let g:neocomplcache_same_filetype_lists = {}
 let g:neocomplcache_same_filetype_lists._ = '_'
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 if !exists('g:neocomplcache_keyword_patterns')
     let g:neocomplcache_keyword_patterns = {}
 endif
@@ -574,13 +574,13 @@ let OmniCpp_ShowScopeInAbbr = 0
 " 显示补全提示缩略信息中显示函数原型。0 : 不显示(缺省) 1 : 显示原型
 let g:OmniCpp_ShowPrototypeInAbbr = 0
 " 在'.'号后自动运行omnicppcomplete给出提示信息。0/1, 缺省为1
-let g:OmniCpp_MayCompleteDot = 0
+let g:OmniCpp_MayCompleteDot = 1
 " 在->后自动运行omnicppcomplete给出提示信息。0/1, 缺省为1
-let g:OmniCpp_MayCompleteArrow = 0
+let g:OmniCpp_MayCompleteArrow = 1
 " 在域标识符::后是否自动运行omnicppcomplete给出提示信息。0/1, 缺省为0
 let g:OmniCpp_MayCompleteScope = 0
 " 默认命名空间列表，项目间使用','隔开
-let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD", "boost"]
 " 自动选择第一个匹配项。仅当completeopt不为longest时有效。0 :不选择第一项(缺省) 1 : 选择第一项并插入到光标
 " 位置 2 : 选择第一项但不插入光标位置
 "let g:OmniCpp_SelectFirstItem = 0
@@ -600,12 +600,12 @@ let g:lua_complete_omni=1
 
 let $VIMPROJECT = $vimpath."vimfiles"
 if(g:iswindows==1)
-    :set tags+=$VIMPROJECT/vimlib/cppstl/tags,$VIMPROJECT/vimlib/linux/tags
+    set tags+=$VIMPROJECT/vimlib/cppstl/tags,$VIMPROJECT/vimlib/boost/tags,$VIMPROJECT/vimlib/linux/tags
 else
-    :set tags+=$VIMPROJECT/vimlib/cppstl/tags,$VIMPROJECT/vimlib/linux/tags.linux
+    set tags+=$VIMPROJECT/vimlib/cppstl/tags,$VIMPROJECT/vimlib/boost/tags,$VIMPROJECT/vimlib/linux/tags.linux
 endif
 
-:set path+=$VIMPROJECT/vimlib/cppstl/cpp_src,$VIMPROJECT/vimlib/linux/include
+:set path+=$VIMPROJECT/vimlib/cppstl/cpp_src,$VIMPROJECT/vimlib/linux/include,$VIMPROJECT/vimlib/boost/boost
 :set path+=$VIMPROJECT/vimlib/linux/include/sys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
