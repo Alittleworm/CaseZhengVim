@@ -67,6 +67,9 @@ endif
 "让cpp文件在.h和.cpp文件中切换
 Bundle 'vim-scripts/a.vim'
 
+"根据生成的Tag文件，高亮类、变量、函数和关键字。
+Plugin 'magic-dot-files/TagHighlight'
+
 "Plugin 'klen/python-mode'
 
 "if(g:iswindows==1)
