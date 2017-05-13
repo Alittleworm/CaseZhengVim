@@ -174,9 +174,7 @@ set showcmd
 " 命令行显示vim当前模
 set showmode
 
-
 " 设置背景颜色
-set background=dark
 syntax enable
 "colorscheme solarized
 "colorscheme wombat
@@ -187,6 +185,7 @@ if(g:iswindows==0)
 else
     colorscheme evening 
 end
+set background=dark
 
 " better backup, swap and undos storage
 set directory=~/.vim/dirs/tmp     " directory to place swap files in

@@ -127,7 +127,7 @@ Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 
 " 显示终端的各种颜色对应的编号
-"Plugin 'guns/xterm-color-table.vim'
+Plugin 'guns/xterm-color-table.vim'
 
 " ============================================================================
 " 在安装Vundle后只运行一次
@@ -147,6 +147,11 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 " 快捷键 i 开/关缩进可视化
 ":nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+if (&g:background == 'dark')
+    let g:indent_guides_auto_colors = 0
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermfg=237 ctermbg=236 guifg=grey70 guibg=grey85
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermfg=236 ctermbg=237 guifg=grey85 guibg=grey70
+endif
 "--------------------------------------vim-indent-guides--------------------
 
 """"""""""""""""""""""""""""""""""""""""""""tab 管理"""""""""""""""""""""""""
