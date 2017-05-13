@@ -67,9 +67,6 @@ endif
 "让cpp文件在.h和.cpp文件中切换
 Bundle 'vim-scripts/a.vim'
 
-"根据生成的Tag文件，高亮类、变量、函数和关键字。
-Plugin 'magic-dot-files/TagHighlight'
-
 "Plugin 'klen/python-mode'
 
 "if(g:iswindows==1)
@@ -653,16 +650,15 @@ function Do_CsTag()
         endif
     endif
     if(executable('ctags'))
-"        silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q ."
-         silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q --langdef=MYLUA --langmap=MYLUA:.lua --regex-MYLUA="/^.*\s*function\s*(\w+):(\w+).*$/\2/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*[0-9]+.*$/\1/e/" --regex-MYLU A="/^.*\s*function\s*(\w+)\.(\w+).*$/\2/f/" --regex-MYLUA="/^.*\s*function\s*(\w+)\s*\(.*$/\1/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*\{.*$/\1/e/" --regex-MYLUA="/^\s*module\s+\"(\w+)\".*$/\1/m,module/" --regex-MYLUA="/^\s*module\s+\"[a-zA-Z0-9._]+\.(\w+)\".*$/\1/m,module/" --languages=MYLUA --excmd=number ."
+        silent! execute "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q ."
     else
         echohl WarningMsg | echo "Fail ctags" | echohl None
     endif
     if(executable('cscope') && has("cscope") )
         if(g:iswindows!=1)
-              silent! execute "!find . -name '*.h' -name '*.hpp' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+              silent! execute "!find . -name '*.h' -name '*.hpp' -o -name '*.c' -o -name '*.cpp' -o -name '*.lua' -o -name '*.cs' > cscope.files"
           else
-              silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hpp,*.java,*.cs >> cscope.files"
+              silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hpp,*.lua,*.cs >> cscope.files"
         endif
         silent! execute "!cscope -b"
         execute "normal :"
@@ -704,6 +700,7 @@ let g:proj_flags="icmStg"
 filetype  on
 
 if(executable('cscope') && has("cscope") )
+    silent! execute "cs kill -1"
     silent! execute "!cscope -b"
     if filereadable("cscope.out")
         execute "cs add cscope.out"
