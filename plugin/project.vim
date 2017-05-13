@@ -502,16 +502,16 @@ function! s:Project(filename) " <<<
         if (foldclosed(line) != -1) || (getline(line) =~ '}')
             let foldlev=foldlev - 1
         endif
-        let absolute = (foldlev <= 0)?'Absolute ': ''
+        let absolute = (foldlev <= 0)?'绝对': ''
         let home=''
         let filter='*'
         if (match(g:proj_flags, '\Cb') != -1) && has('browse')
             " Note that browse() is inconsistent: On Win32 you can't select a
             " directory, and it gives you a relative path.
-            let dir = browse(0, 'Enter the '.absolute.'Directory to Load: ', '', '')
+            let dir = browse(0, '输入项目'.absolute.'路径: ', '', '')
             let dir = fnamemodify(dir, ':p')
         else
-            let dir = inputdialog('Enter the '.absolute.'Directory to Load: ', '')
+            let dir = inputdialog('输入项目'.absolute.'路径: ', '')
         endif
         if (dir[strlen(dir)-1] == '/') || (dir[strlen(dir)-1] == '\\')
             let dir=strpart(dir, 0, strlen(dir)-1) " Remove trailing / or \
@@ -546,8 +546,9 @@ function! s:Project(filename) " <<<
                 return
             endif
         endif
-        let c_d = inputdialog('Enter the CD parameter: ', '')
-        let filter_directive = inputdialog('Enter the File Filter: ', '')
+        let c_d = inputdialog('输入打开项目后的工作目录: ', '')
+        let c_d = (strlen(c_d)==0) ? home.dir : c_d
+        let filter_directive = inputdialog('输入加入到项目中的文件类型,不输入表示全部加入: ', '')
         if strlen(filter_directive) != 0
             let filter = filter_directive
         endif
