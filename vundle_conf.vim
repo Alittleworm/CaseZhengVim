@@ -47,9 +47,11 @@ Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
 " Extension to ctrlp, for fuzzy command finder
 Plugin 'fisadev/vim-ctrlp-cmdpalette'
+" 快速批量搜索代码，搜索文件, 模糊匹配, 正则表达式 配合ctrlp使用的
+Plugin 'rking/ag.vim'
 
 " 处理 git merge 文件冲突
-Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-fugitive'
 
 " tab管理
 Plugin 'kien/tabman.vim'
@@ -320,7 +322,7 @@ map <F6> :A<CR>
 let g:ctrlp_map = ',p'
 " hidden some types files
 let g:ctrlp_show_hidden = 1
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif           "Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif,*.tag,*.out,*.file         "Linux
 " tags (symbols) in current file finder mapping
 nmap ,pg :CtrlPBufTag<CR>
 " tags (symbols) in all files finder mapping
@@ -351,6 +353,14 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|\.hg|\.svn)$',
   \ 'file': '\.pyc$\|\.pyo$',
   \ }
+if g:iswindows==0 && executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " Ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 "---------------------------------------------------------------------------
 
 
