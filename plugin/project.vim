@@ -494,7 +494,7 @@ function! s:Project(filename) " <<<
         " Save a mark for the current cursor position
         normal! mk
         let line=line('.')
-        let name = inputdialog('Enter the Name of the Entry: ')
+        let name = inputdialog('输入项目名称: ')
         if strlen(name) == 0
             return
         endif
