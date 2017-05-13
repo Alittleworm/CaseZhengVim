@@ -353,6 +353,7 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|\.hg|\.svn)$',
   \ 'file': '\.pyc$\|\.pyo$',
   \ }
+" linux下使用ag提高效率
 if g:iswindows==0 && executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
