@@ -600,12 +600,12 @@ let g:OmniCpp_MayCompleteDot = 1
 " 在->后自动运行omnicppcomplete给出提示信息。0/1, 缺省为1
 let g:OmniCpp_MayCompleteArrow = 1
 " 在域标识符::后是否自动运行omnicppcomplete给出提示信息。0/1, 缺省为0
-let g:OmniCpp_MayCompleteScope = 0
+let g:OmniCpp_MayCompleteScope = 1
 " 默认命名空间列表，项目间使用','隔开
 let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD", "boost"]
 " 自动选择第一个匹配项。仅当completeopt不为longest时有效。0 :不选择第一项(缺省) 1 : 选择第一项并插入到光标
 " 位置 2 : 选择第一项但不插入光标位置
-"let g:OmniCpp_SelectFirstItem = 0
+let g:OmniCpp_SelectFirstItem = 0
 
 "自动关闭补全窗口
 "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif 
