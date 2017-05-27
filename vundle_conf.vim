@@ -289,7 +289,7 @@ map <F2> :NERDTree<CR>
 " 打开 NERDTree 并选中当前文件
 nmap ,t :NERDTreeFind<CR>
 " 过滤文件和文件夹的显示
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$', 'cscope.file', 'cscope.out', 'tag', '\.sln$', '\.vcxproj$', '\.filters$', '\.vcxproj\.user$', '\.exe$']
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$', 'cscope.file', 'cscope.out', 'tag$', '\.sln$', '\.vcxproj$', '\.filters$', '\.vcxproj\.user$', '\.exe$']
 " 设置宽度
 let NERDTreeWinSize=25
 " 排序
