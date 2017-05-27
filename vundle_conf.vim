@@ -73,7 +73,7 @@ Bundle 'vim-scripts/a.vim'
 
 "if(g:iswindows==1)
 "    "vim 自动补全插件
-    Plugin 'Shougo/neocomplcache.vim'
+"    Plugin 'Shougo/neocomplcache.vim'
 "endif
 
 if(g:iswindows==0)
@@ -592,7 +592,7 @@ let g:OmniCpp_ShowAccess = 1
 let g:OmniCpp_DisplayMode = 0
 " 选项用来控制匹配项所在域的显示位置。缺省情况下，omni显示的补全提示菜单中总是将匹配项所在域信息显示在
 " 缩略信息最后一列。 0 : 信息缩略中不显示匹配项所在域(缺省) 1 : 显示匹配项所在域，并移除缩略信息中最后一列
-let OmniCpp_ShowScopeInAbbr = 0
+let OmniCpp_ShowScopeInAbbr = 1
 " 显示补全提示缩略信息中显示函数原型。0 : 不显示(缺省) 1 : 显示原型
 let g:OmniCpp_ShowPrototypeInAbbr = 0
 " 在'.'号后自动运行omnicppcomplete给出提示信息。0/1, 缺省为1
@@ -620,7 +620,7 @@ let g:lua_check_globals=0
 let g:lua_complete_omni=1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let $VIMPROJECT = $vimpath."vimfiles"
+let $VIMPROJECT = $vimpath
 if(g:iswindows==1)
     set tags+=$VIMPROJECT/vimlib/cppstl/tags,$VIMPROJECT/vimlib/boost/tags,$VIMPROJECT/vimlib/linux/tags
 else
