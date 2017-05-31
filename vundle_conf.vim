@@ -754,7 +754,7 @@ function SetTitle()
     elseif &filetype == 'markdown'
         call setline(1,"---")
         call append(line(".")+0, "layout:    post")  
-        call append(line(".")+1, "title:     ".expand("%:t"))  
+        call append(line(".")+1, "title:     \"".expand("%:t")."\"")  
         call append(line(".")+2, "date:      ".strftime("%Y-%m-%d %H:%M"))  
         call append(line(".")+3, "categories:")  
         call append(line(".")+4, "tags:      ")  
