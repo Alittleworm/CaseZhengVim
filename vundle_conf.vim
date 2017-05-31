@@ -753,7 +753,7 @@ function SetTitle()
 	    call append(line(".")+1, "") 
     elseif &filetype == 'markdown'
         call append(line("."), "\layout: post")  
-        call append(line(".")+1, "\title: ".)  
+        call append(line(".")+1, "\title: ")  
         call append(line(".")+2, "\date: ".strftime("%c"))  
         call append(line(".")+3, "\categories:")  
         call append(line(".")+4, "\tags:")  
