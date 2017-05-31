@@ -742,7 +742,7 @@ function Do_CsTag()
 endfunction
 
 " 新建文件自动插入头部
-autocmd BufNewFile *.sh,*.py,*.rb exec ":call SetTitle()"
+autocmd BufNewFile *.sh,*.py,*.rb,*.md exec ":call SetTitle()"
 function SetTitle()
     if &filetype == 'sh'
         call setline(1,"\#!/bin/bash")
@@ -751,8 +751,19 @@ function SetTitle()
         call setline(1,"#!/usr/bin/env python")
         call append(line("."),"# coding=utf-8")
 	    call append(line(".")+1, "") 
+    elseif &filetype == 'markdown'
+        call append(line("."), "\layout: post")  
+        call append(line(".")+1, "\title: ".)  
+        call append(line(".")+2, "\date: ".strftime("%c"))  
+        call append(line(".")+3, "\categories:")  
+        call append(line(".")+4, "\tags:")  
+        call append(line(".")+5, "\excerpt:")  
+        call append(line(".")+6, "\mathjax: true")  
+        call append(line(".")+7, "")  
     endif
 endfunction
+map <F9> :call SetTitle()<CR><CR>
+
 autocmd BufNewFile * normal G
 
 "更新TAG
