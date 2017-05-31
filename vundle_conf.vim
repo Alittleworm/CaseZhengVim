@@ -536,7 +536,7 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 " 2 : 查找当前文件缓冲区和包含文件中的命名空间
 let g:OmniCpp_NamespaceSearch = 1
 " 全局查找控制。0:禁止；1:允许(缺省)
-let g:OmniCpp_GlobalScopeSearch = 1
+let g:OmniCpp_GlobalScopeSearch = 0
 " 显示访问控制信息('+', '-', '#')。0/1, 缺省为1(显示)
 let g:OmniCpp_ShowAccess = 1
 " 类成员显示控制(公有(public)私有(private)保护(protected)成员)。 0 : 自动 1 : 显示所有成员
@@ -553,10 +553,10 @@ let g:OmniCpp_MayCompleteArrow = 1
 " 在域标识符::后是否自动运行omnicppcomplete给出提示信息。0/1, 缺省为0
 let g:OmniCpp_MayCompleteScope = 1
 " 默认命名空间列表，项目间使用','隔开
-let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD", "boost"]
+let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " 自动选择第一个匹配项。仅当completeopt不为longest时有效。0 :不选择第一项(缺省) 1 : 选择第一项并插入到光标
 " 位置 2 : 选择第一项但不插入光标位置
-let g:OmniCpp_SelectFirstItem = 0
+let g:OmniCpp_SelectFirstItem = 2
 
 "自动关闭补全窗口
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif 
@@ -575,18 +575,18 @@ let g:lua_complete_omni=1
 let $VIMPROJECT = $vimpath
 set tags=tags
 if(g:iswindows==1)
-    set tags+=~/.vim/vimlib/boost/tags
-    set tags+=~/.vim/vimlib/linux/tags
     set tags+=~/.vim/vimlib/cppstl/tags
+    set tags+=~/.vim/vimlib/linux/tags
+"    set tags+=~/.vim/vimlib/boost/tags
 else
     set tags+=~/.vim/vimlib/cppstl/tags
-    set tags+=~/.vim/vimlib/boost/tags
     set tags+=~/.vim/vimlib/linux/tags.linux
+"    set tags+=~/.vim/vimlib/boost/tags
 endif
 
 set path+=~/.vim/vimlib/cppstl/cpp_src
 set path+=~/.vim/vimlib/linux/include
-set path+=~/.vim/vimlib/boost/boost
+"set path+=~/.vim/vimlib/boost/boost
 set path+=~/.vim/vimlib/linux/include/sys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
