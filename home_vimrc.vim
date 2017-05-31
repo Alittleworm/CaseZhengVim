@@ -9,7 +9,7 @@ if(g:iswindows)
 	let $vimpath = "~/.vim/"
 	let $vimrcpath = $vimpath."myvimrc.vim"
 	let $PATH_OLD = $PATH
-	let $HOMEPATH = "C:/Users/CaseZheng/"
+	let $HOMEPATH = "~/"
 	let $PATH = $PATH_OLD.";".$HOMEPATH.".vim/exec/"
 else
 	let $vimpath = "~/"

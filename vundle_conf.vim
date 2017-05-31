@@ -71,10 +71,8 @@ Bundle 'vim-scripts/a.vim'
 
 "Plugin 'klen/python-mode'
 
-"if(g:iswindows==1)
-"    "vim 自动补全插件
-    Plugin 'Shougo/neocomplcache.vim'
-"endif
+"onmicppcompete功能：命名空间(namespace),类(class),结构(struct)和联合(union)补全 函数属性成员和返回值类型补全 this指针成员补全 C/C++类型转换(cast)对象补全 类型定义和匿名类型补全
+Bundle 'omnicppcomplete'
 
 if(g:iswindows==0)
 "    Bundle 'Valloric/YouCompleteMe'
@@ -94,10 +92,6 @@ Plugin 'honza/vim-snippets'
 Plugin 'mhinz/vim-signify'
 "Plugin 'fisadev/vim-isort'
 
-"onmicppcompete功能：
-"命名空间(namespace),类(class),结构(struct)和联合(union)补全 函数属性成员和返回值类型补全 this指针成员补全
-"C/C++类型转换(cast)对象补全 类型定义和匿名类型补全
-Bundle 'omnicppcomplete'
 
 "if(g:iswindows)
 "    "Python and other languages code checker 语法检测
@@ -181,9 +175,6 @@ imap <M-Right> <ESC><c-w>l
 imap <M-Left> <ESC><c-w>h
 imap <M-Up> <ESC><c-w>k
 imap <M-Down> <ESC><c-w>j
-
-" 自动补全映射
-"imap <C-J> <C-X><C-O>
 
 set completeopt-=preview
 set completeopt=menuone,menu,longest 
@@ -416,49 +407,6 @@ endif
 "nmap ,o :RopeFindOccurrences<CR>
 
 
-"----------------------------- NeoComplCache ------------------------------
-let g:acp_enableAtStartup = 0
-" 在系统启动的时候启动neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-"let g:neocomplcache_enable_ignore_case = 1
-"let g:neocomplcache_enable_smart_case = 1
-" 提示的时候默认选择地一个，如果你设置为0，每次输入都需要用上下键选择
-let g:neocomplcache_enable_auto_select = 1
-" 设置NeoComplCache不自动弹出补全列表
-let g:NeoComplCache_DisableAutoComplete = 0
-"let g:neocomplcache_enable_fuzzy_completion = 1
-"let g:neocomplcache_enable_camel_case_completion = 1
-"let g:neocomplcache_enable_underbar_completion = 1
-"let g:neocomplcache_fuzzy_completion_start_length = 1
-"let g:neocomplcache_auto_completion_start_length = 1
-"let g:neocomplcache_manual_completion_start_length = 1
-let g:neocomplcache_min_keyword_length = 3
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-" complete with workds from any opened file
-let g:neocomplcache_same_filetype_lists = {}
-let g:neocomplcache_same_filetype_lists._ = '_'
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-" Plugin key-mappings.
-" 取消补全
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-" 完成待补全项中共同的字符串
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-" <C-h>, <BS>: close popup and delete backword char.
-" 关闭待选项
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-" 关闭待选项
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-" 关闭待选项
-inoremap <expr><C-y>  neocomplcache#close_popup()
-" 退出待选项
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-"----------------------------- NeoComplCache ------------------------------
-
 
 "------------------------------------- TabMan ------------------------------
 " mappings to toggle display, and to focus on it
@@ -579,7 +527,6 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 ""set cscopequickfix=s-,c-,d-,i-,t-,e-   
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 """""""""""""""""""""""""""""""""""""""""""onmicppcompete"""""""""""""""""""""""""""""""""""""""""""""
 " 命名空间查找控制。0 : 禁止查找命名空间 1 : 查找当前文件缓冲区内的命名空间(缺省) 
 " 2 : 查找当前文件缓冲区和包含文件中的命名空间
@@ -608,8 +555,9 @@ let g:OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD", "boost"]
 let g:OmniCpp_SelectFirstItem = 0
 
 "自动关闭补全窗口
-"au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif 
+set completeopt=menuone,menu,longest
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""vim-lua-ftplugin""""""""""""""""""""""""""""""""""""""
 " 自动语法检测 0表示关闭 运行:CheckSyntax手动进行语法检测
@@ -620,15 +568,22 @@ let g:lua_check_globals=0
 let g:lua_complete_omni=1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let $VIMPROJECT = $vimpath."vimfiles"
+let $VIMPROJECT = $vimpath
+set tags=tags
 if(g:iswindows==1)
-    set tags+=$VIMPROJECT/vimlib/cppstl/tags,$VIMPROJECT/vimlib/boost/tags,$VIMPROJECT/vimlib/linux/tags
+    set tags+=~/.vim/vimlib/boost/tags
+    set tags+=~/.vim/vimlib/linux/tags
+    set tags+=~/.vim/vimlib/cppstl/tags
 else
-    set tags+=$VIMPROJECT/vimlib/cppstl/tags,$VIMPROJECT/vimlib/boost/tags,$VIMPROJECT/vimlib/linux/tags.linux
+    set tags+=~/.vim/vimlib/cppstl/tags
+    set tags+=~/.vim/vimlib/boost/tags
+    set tags+=~/.vim/vimlib/linux/tags.linux
 endif
 
-:set path+=$VIMPROJECT/vimlib/cppstl/cpp_src,$VIMPROJECT/vimlib/linux/include,$VIMPROJECT/vimlib/boost/boost
-:set path+=$VIMPROJECT/vimlib/linux/include/sys
+set path+=~/.vim/vimlib/cppstl/cpp_src
+set path+=~/.vim/vimlib/linux/include
+set path+=~/.vim/vimlib/boost/boost
+set path+=~/.vim/vimlib/linux/include/sys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function Do_CsTag()
