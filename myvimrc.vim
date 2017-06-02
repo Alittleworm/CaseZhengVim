@@ -242,7 +242,6 @@ if(g:iswindows==0)
     "colorscheme solarized
     colorscheme lucius
 else
-    colorscheme lucius
-    "colorscheme evening 
+    colorscheme evening 
 end
 set background=dark
