@@ -16,7 +16,7 @@
   
   " == Normal color 正常文本==
   hi Normal           guifg=#00c8c8           guibg=#202020
-  hi Normal           ctermfg=6             ctermbg=234
+  hi Normal           ctermfg=7             ctermbg=234
   
   
   " == Comments 注释==
