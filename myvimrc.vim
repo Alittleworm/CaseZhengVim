@@ -174,18 +174,6 @@ set showcmd
 " 命令行显示vim当前模
 set showmode
 
-" 设置背景颜色
-syntax enable
-"colorscheme solarized
-"colorscheme wombat
-"colorscheme molokai
-"colorscheme delek
-if(g:iswindows==0)
-    colorscheme lucius
-else
-    colorscheme evening 
-end
-set background=dark
 
 " better backup, swap and undos storage
 set directory=~/.vim/dirs/tmp     " directory to place swap files in
@@ -242,3 +230,18 @@ if(g:iswindows==0)
 endif
 
 source ~/.vim/vundle_conf.vim
+
+" 设置背景颜色
+syntax enable
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+"colorscheme wombat
+"colorscheme molokai
+"colorscheme delek
+if(g:iswindows==0)
+    colorscheme solarized
+    "colorscheme lucius
+else
+    "colorscheme evening 
+end
