@@ -761,7 +761,9 @@ function SetTitle()
         call append(line(".")+5, "excerpt:      ")  
         call append(line(".")+6, "mathjax:      true")  
         call append(line(".")+7, "---")  
-        call append(line(".")+8, "")  
+        call append(line(".")+8, "") 
+        call append(line(".")+9, "**版权声明：本文为[CaseZheng]的原创文章，转载请注明出处，否则禁止转载。**")  
+        call append(line(".")+10, "") 
     endif
 endfunction
 map <F9> :call SetTitle()<CR><CR>
