@@ -243,5 +243,5 @@ if(g:iswindows==0)
     colorscheme solarized
     "colorscheme lucius
 else
-    "colorscheme evening 
+    colorscheme evening 
 end
