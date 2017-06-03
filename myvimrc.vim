@@ -231,6 +231,7 @@ endif
 
 source ~/.vim/vundle_conf.vim
 
+set background=dark
 " 设置背景颜色
 syntax enable
 "colorscheme wombat
@@ -244,4 +245,3 @@ if(g:iswindows==0)
 else
     colorscheme evening 
 end
-set background=dark
