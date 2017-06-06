@@ -753,17 +753,18 @@ function SetTitle()
 	    call append(line(".")+1, "") 
     elseif &filetype == 'markdown'
         call setline(1,"---")
-        call append(line(".")+0, "layout:       post")  
         call append(line(".")+1, "title:        \"".expand("%:t")."\"")  
         call append(line(".")+2, "date:         ".strftime("%Y-%m-%d %H:%M"))  
         call append(line(".")+3, "categories:   ")  
         call append(line(".")+4, "tags:         ")  
         call append(line(".")+5, "excerpt:      ")  
-        call append(line(".")+6, "mathjax:      true")  
-        call append(line(".")+7, "---")  
-        call append(line(".")+8, "") 
-        call append(line(".")+9, "**版权声明：本文为[CaseZheng]的原创文章，转载请注明出处，否则禁止转载。**")  
+        call append(line(".")+6, "author:       CaseZheng")  
+        call append(line(".")+7, "layout:       post")  
+        call append(line(".")+8, "mathjax:      true")  
+        call append(line(".")+9, "---")  
         call append(line(".")+10, "") 
+        call append(line(".")+11, "**版权声明：本文为[CaseZheng]的原创文章，转载请注明出处，否则禁止转载。**")  
+        call append(line(".")+12, "") 
     endif
 endfunction
 map <F9> :call SetTitle()<CR><CR>
