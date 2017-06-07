@@ -305,3 +305,7 @@
   hi VimwikiHeader5   ctermfg=182                                     cterm=none
   hi VimwikiHeader6   guifg=#90d0a0                                   gui=bold
   hi VimwikiHeader6   ctermfg=115                                     cterm=none
+
+  let g:indent_guides_auto_colors = 0
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermfg=237 ctermbg=236 guifg=grey20 guibg=grey25
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermfg=236 ctermbg=237 guifg=grey20 guibg=grey25
