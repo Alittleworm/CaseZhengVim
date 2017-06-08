@@ -53,6 +53,9 @@ Plugin 'rking/ag.vim'
 " 处理 git merge 文件冲突
 "Plugin 'tpope/vim-fugitive'
 
+" 显示色彩对应的颜色
+Plugin 'lilydjwg/colorizer'
+
 " tab管理
 Plugin 'kien/tabman.vim'
 

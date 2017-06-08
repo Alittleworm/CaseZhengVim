@@ -15,54 +15,54 @@
   
   
   " == Normal color 正常文本==
-  hi Normal           guifg=#00c8c8           guibg=#202020
-  hi Normal           ctermfg=7             ctermbg=234
+  hi Normal           guifg=#ffffff           guibg=#1c1c1c 
+  hi Normal           ctermfg=15             ctermbg=234
   
   
   " == Comments 注释==
-  hi Comment          guifg=#e0e2e2                                   gui=none
-  hi Comment          ctermfg=246                                     cterm=none
+  hi Comment          guifg=#a8a8a8                                   gui=none
+  hi Comment          ctermfg=248                                     cterm=none
   
   
   " == Constants 常量==
   " any constant
-  hi Constant         guifg=#ff394f                                   gui=none
-  hi Constant         ctermfg=75                                      cterm=none
-  " strings
+  hi Constant         guifg=#ff0087                                   gui=none
+  hi Constant         ctermfg=198                                      cterm=none
+  " strings 字符串
   hi String           guifg=#ffffff                                   gui=none
-  hi String           ctermfg=110                                     cterm=none
-  " character constant
-  hi Character        guifg=#80c0d8                                   gui=none
+  hi String           ctermfg=231                                    cterm=none
+  " character constant 字符常数
+  hi Character        guifg=#87afdf                                   gui=none
   hi Character        ctermfg=110                                     cterm=none
-  " numbers decimal/hex
-  hi Number           guifg=#c84600                                   gui=none
-  hi Number           ctermfg=126                                     cterm=none
+  " numbers decimal/hex 十六进制数 小数
+  hi Number           guifg=#ffaf00                                   gui=none
+  hi Number           ctermfg=214                                     cterm=none
   " true, false
-  hi Boolean          guifg=#129821                                   gui=none
-  hi Boolean          ctermfg=126                                      cterm=none
-  " float
-  hi Float            guifg=#129821                                   gui=none
-  hi Float            ctermfg=126                                      cterm=none
+  hi Boolean          guifg=#00af00                                   gui=none
+  hi Boolean          ctermfg=34                                      cterm=none
+  " float       浮点数
+  hi Float            guifg=#ffaf00                                   gui=none
+  hi Float            ctermfg=214                                      cterm=none
   
   
-  " == Identifiers ==
-  " any variable name
-  hi Identifier       guifg=#86c6b6                                   gui=none 
+  " == Identifiers 标识符==
+  " any variable name 任何变量名
+  hi Identifier       guifg=#df005f                                   gui=none 
   hi Identifier       ctermfg=161                                     cterm=none
-  " function, method, class
-  hi Function         guifg=#86c6b6                                   gui=none 
-  hi Function         ctermfg=161                                     cterm=none
+  " function, method, class 函数 方法 类
+  hi Function         guifg=#df0087                                   gui=none 
+  hi Function         ctermfg=162                                     cterm=none
   
   
-  " == Statements 关键字==
-  " any statement
-  hi Statement        guifg=#b3d38c                                   gui=none
+  " == Statements 声明==
+  " any statement 任何声明
+  hi Statement        guifg=#ffff00                                   gui=none
   hi Statement        ctermfg=226                                     cterm=none
   " if, then, else
   hi Conditional      guifg=#ffff00                                   gui=none
   hi Conditional      ctermfg=226                                     cterm=none
   " try, catch, throw, raise
-  hi Exception        guifg=#b3d38c                                   gui=none
+  hi Exception        guifg=#ffff00                                   gui=none
   hi Exception        ctermfg=226   cterm=none
   " for, while, do
   hi Repeat           guifg=#ffff00                                   gui=none
@@ -79,80 +79,80 @@
   
   
   " == Preprocessor 预处理 ==
-  " generic preprocessor
-  hi PreProc          guifg=#e0e8b0                                   gui=none
-  hi PreProc          ctermfg=148                                     cterm=none
+  " generic preprocessor 通用的预处理
+  hi PreProc          guifg=#00df00                                   gui=none
+  hi PreProc          ctermfg=40                                     cterm=none
   " #include
-  hi Include          guifg=#00be00                                   gui=none
-  hi Include          ctermfg=148                                     cterm=none
+  hi Include          guifg=#00df00                                   gui=none
+  hi Include          ctermfg=40                                     cterm=none
   " #define
-  hi Define           guifg=#00be00                                   gui=none
-  hi Define           ctermfg=148                                     cterm=none
+  hi Define           guifg=#00df00                                   gui=none
+  hi Define           ctermfg=40                                     cterm=none
   " same as define
-  hi Macro            guifg=#00be00                                   gui=none
-  hi Macro            ctermfg=148                                     cterm=none
+  hi Macro            guifg=#00df00                                   gui=none
+  hi Macro            ctermfg=40                                     cterm=none
   " #if, #else, #endif
-  hi PreCondit        guifg=#ffff00                                   gui=none
-  hi PreCondit        ctermfg=148                                     cterm=none
+  hi PreCondit        guifg=#00df00                                   gui=none
+  hi PreCondit        ctermfg=40                                     cterm=none
   
   
   " == Types 类型==
   " int, long, char
-  hi Type             guifg=#00be00                                   gui=none
-  hi Type             ctermfg=82                                     cterm=none
+  hi Type             guifg=#5fff5f                                   gui=none
+  hi Type             ctermfg=83                                     cterm=none
   " static, register, volative
-  hi StorageClass     guifg=#00be00                                   gui=none
-  hi StorageClass     ctermfg=82                                     cterm=none
+  hi StorageClass     guifg=#5fff5f                                   gui=none
+  hi StorageClass     ctermfg=83                                     cterm=none
   " struct, union, enum
-  hi Structure        guifg=#00be00                                   gui=none
-  hi Structure        ctermfg=82                                     cterm=none
+  hi Structure        guifg=#5fff5f                                   gui=none
+  hi Structure        ctermfg=83                                     cterm=none
   " typedef
-  hi Typedef          guifg=#ffff00                                   gui=none
-  hi Typedef          ctermfg=82                                     cterm=none
+  hi Typedef          guifg=#5fff5f                                   gui=none
+  hi Typedef          ctermfg=83                                     cterm=none
   
   
   " == Special ==
   " any special symbol
-  hi Special          guifg=#b0a0c0                                   gui=none
+  hi Special          guifg=#dfafdf                                   gui=none
   hi Special          ctermfg=182                                     cterm=none
   " special character in a constant
-  hi SpecialChar      guifg=#b0a0c0                                   gui=none
+  hi SpecialChar      guifg=#dfafdf                                   gui=none
   hi SpecialChar      ctermfg=182                                     cterm=none
   " things you can CTRL-]
-  hi Tag              guifg=#b0a0c0                                   gui=none
+  hi Tag              guifg=#dfafdf                                   gui=none
   hi Tag              ctermfg=182                                     cterm=none
   " character that needs attention
-  hi Delimiter        guifg=#b0a0c0                                   gui=none
+  hi Delimiter        guifg=#dfafdf                                   gui=none
   hi Delimiter        ctermfg=182                                     cterm=none
   " special things inside a comment
-  hi SpecialComment   guifg=#b0a0c0                                   gui=none
+  hi SpecialComment   guifg=#dfafdf                                   gui=none
   hi SpecialComment   ctermfg=182                                     cterm=none
   " debugging statements
-  hi Debug            guifg=#b0a0c0           guibg=NONE              gui=none
-  hi Debug            ctermfg=182             ctermbg=NONE            cterm=none
+  hi Debug            guifg=#dfafdf                                   gui=none
+  hi Debug            ctermfg=182                                     cterm=none
   
   
-  " == Text Markup ==
-  " text that stands out, html links
+  " == Text Markup 文本标记==
+  " text that stands out, html links 文本突出 HTMML链接
   hi Underlined       guifg=fg                                        gui=underline
   hi Underlined       ctermfg=fg                                      cterm=underline
-  " any erroneous construct
-  hi Error            guifg=#e37170           guibg=#432323           gui=none
-  hi Error            ctermfg=167             ctermbg=236            cterm=none
+  " any erroneous construct 任何错误
+  hi Error            guifg=#df5f5f           guibg=#606060           gui=none
+  hi Error            ctermfg=167             ctermbg=241            cterm=none
   " todo, fixme, note, xxx
-  hi Todo             guifg=#e0e090           guibg=NONE              gui=underline
+  hi Todo             guifg=#dfdf87           guibg=NONE              gui=underline
   hi Todo             ctermfg=186             ctermbg=NONE            cterm=underline
-  " match parenthesis, brackets
+  " match parenthesis, brackets 匹配括号 括号
   hi MatchParen       guifg=#00ff00           guibg=NONE              gui=bold
   hi MatchParen       ctermfg=46              ctermbg=NONE            cterm=bold
   " the '~' and '@' and showbreak, '>' double wide char doesn't fit on line
-  hi NonText          guifg=#404040                                   gui=none
-  hi NonText          ctermfg=238                                     cterm=none
-  " meta and special keys used with map, unprintable characters
-  hi SpecialKey       guifg=#405060
-  hi SpecialKey       ctermfg=239
-  " titles for output from :set all, :autocmd, etc
-  hi Title            guifg=#62bdde                                   gui=none
+  hi NonText          guifg=#585858                                   gui=none
+  hi NonText          ctermfg=240                                     cterm=none
+  " meta and special keys used with map, unprintable characters 不可打印字符
+  hi SpecialKey       guifg=#c6c6c6
+  hi SpecialKey       ctermfg=251
+  " titles for output from :set all, :autocmd, etc 输出的命令
+  hi Title            guifg=#5fafdf                                   gui=none
   hi Title            ctermfg=74                                      cterm=none
   
   
@@ -162,42 +162,42 @@
   hi Ignore           ctermfg=bg
   
   
-  " == Text Selection ==
-  " character under the cursor
-  hi Cursor           guifg=bg                guibg=#a3e3ed
-  hi Cursor           ctermfg=255             ctermbg=153
-  " like cursor, but used when in IME mode
-  hi CursorIM         guifg=bg                guibg=#96cdcd
-  hi CursorIM         ctermfg=NONE              ctermbg=116
-  " cursor column
-  hi CursorColumn     guifg=NONE              guibg=#404448           gui=none
+  " == Text Selection 文本选择==
+  " character under the cursor 光标下字符
+  hi Cursor           guifg=bg                guibg=#afdfff
+  hi Cursor           ctermfg=bg             ctermbg=153
+  " like cursor, but used when in IME mode  在IME模式下使用连接光标
+  hi CursorIM         guifg=bg                guibg=#87dfdf
+  hi CursorIM         ctermfg=bg              ctermbg=116
+  " cursor column 光标行
+  hi CursorColumn     guifg=NONE              guibg=#444444           gui=none
   hi CursorColumn     ctermfg=NONE            ctermbg=238             cterm=none
-  " cursor line/row
-  hi CursorLine       gui=NONE                guibg=#404448           gui=none
+  " cursor line/row 光标列
+  hi CursorLine       gui=NONE                guibg=#444444           gui=none
   hi CursorLine       cterm=NONE              ctermbg=238             cterm=none
-  " visual mode selection
-  hi Visual           guifg=NONE              guibg=#364458
+  " visual mode selection 选择模式
+  hi Visual           guifg=NONE              guibg=#005f87
   hi Visual           ctermfg=NONE            ctermbg=24
   " visual mode selection when vim is not owning the selection (x11 only)
   hi VisualNOS        guifg=fg                                        gui=underline
   hi VisualNOS        ctermfg=fg                                      cterm=underline
   " highlight incremental search text; also highlight text replaced with :s///c
-  hi IncSearch        guifg=#66ffff                                   gui=reverse
+  hi IncSearch        guifg=#5fffff                                   gui=reverse
   hi IncSearch        ctermfg=87                                      cterm=reverse
   " hlsearch (last search pattern), also used for quickfix
-  hi Search                                    guibg=#ffaa33          gui=none
+  hi Search                                    guibg=#ffdf87          gui=none
   hi Search                                    ctermbg=222            cterm=none
   
   
   " == UI ==
-  " normal item in popup
-  hi Pmenu            guifg=#e0e0e0           guibg=#303840           gui=none
-  hi Pmenu            ctermfg=253             ctermbg=233             cterm=none
-  " selected item in popup
-  hi PmenuSel         guifg=#cae682           guibg=#505860           gui=none
+  " normal item in popup 弹出的item
+  hi Pmenu            guifg=#dadada           guibg=#4e4e4e           gui=none
+  hi Pmenu            ctermfg=253             ctermbg=239             cterm=none
+  " selected item in popup 弹出中选中的item
+  hi PmenuSel         guifg=#dfdf87           guibg=#3a3a3a           gui=none
   hi PmenuSel         ctermfg=186             ctermbg=237             cterm=none
-  " scrollbar in popup
-  hi PMenuSbar                                guibg=#505860           gui=none
+  " scrollbar in popup 弹出窗口中的滚动条
+  hi PMenuSbar                                guibg=#5f5f5f           gui=none
   hi PMenuSbar                                ctermbg=59              cterm=none
   " thumb of the scrollbar in the popup
   hi PMenuThumb                               guibg=#808890           gui=none
@@ -258,13 +258,14 @@
   hi DiffText         ctermfg=203             ctermbg=52              cterm=bold
   
   
-  " == Misc ==
-  " directory names and other special names in listings
-  hi Directory        guifg=#c0e0b0                                   gui=none
-  hi Directory        ctermfg=151                                     cterm=none
-  " error messages on the command line
-  hi ErrorMsg         guifg=#ee0000           guibg=NONE              gui=none
+  " == Misc 杂项==
+  " directory names and other special names in listings 列表中的目录名称和其他特殊名称
+  hi Directory        guifg=#af00ff                                   gui=none
+  hi Directory        ctermfg=129                                     cterm=none
+  " error messages on the command line 命令行上错误信息
+  hi ErrorMsg         guifg=#ff0000           guibg=NONE              gui=none
   hi ErrorMsg         ctermfg=196             ctermbg=NONE            cterm=none
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""begin
   " columns where signs are displayed (used in IDEs)
   hi SignColumn       guifg=#9fafaf           guibg=#181818           gui=none
   hi SignColumn       ctermfg=145             ctermbg=233             cterm=none
@@ -290,22 +291,23 @@
   hi ColorColumn      guifg=NONE              guibg=#403630           gui=none
   hi ColorColumn      ctermfg=NONE            ctermbg=95              cterm=none
   
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""end
   
-  " == Vimwiki Colors ==
+  " == Vimwiki Colors Vimwiki颜色==
   
-  hi VimwikiHeader1   guifg=#e0e8b0                                   gui=bold
-  hi VimWikiHeader1   ctermfg=187                                     cterm=none
-  hi VimwikiHeader2   guifg=#80c0d8                                   gui=bold
-  hi VimwikiHeader2   ctermfg=110                                     cterm=none
-  hi VimwikiHeader3   guifg=#b3d38c                                   gui=bold
-  hi VimwikiHeader3   ctermfg=150                                     cterm=none
-  hi VimwikiHeader4   guifg=#86c6b6                                   gui=bold 
-  hi VimwikiHeader4   ctermfg=116                                     cterm=none
-  hi VimwikiHeader5   guifg=#b0a0c0                                   gui=bold
-  hi VimwikiHeader5   ctermfg=182                                     cterm=none
-  hi VimwikiHeader6   guifg=#90d0a0                                   gui=bold
+  hi VimwikiHeader1   guifg=#dfdfaf                                   gui=bold
+  hi VimWikiHeader1   ctermfg=187                                     cterm=bold
+  hi VimwikiHeader2   guifg=#87afdf                                   gui=bold
+  hi VimwikiHeader2   ctermfg=110                                     cterm=bold
+  hi VimwikiHeader3   guifg=#afdf87                                   gui=bold
+  hi VimwikiHeader3   ctermfg=150                                     cterm=bold
+  hi VimwikiHeader4   guifg=#87dfdf                                   gui=bold 
+  hi VimwikiHeader4   ctermfg=116                                     cterm=bold
+  hi VimwikiHeader5   guifg=#dfafdf                                   gui=bold
+  hi VimwikiHeader5   ctermfg=182                                     cterm=bold
+  hi VimwikiHeader6   guifg=#87dfaf                                   gui=bold
   hi VimwikiHeader6   ctermfg=115                                     cterm=none
 
   let g:indent_guides_auto_colors = 0
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermfg=237 ctermbg=236 guifg=grey20 guibg=grey25
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermfg=236 ctermbg=237 guifg=grey20 guibg=grey25
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermfg=237 ctermbg=236 guifg=#303030 guibg= #3a3a3a
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermfg=236 ctermbg=237 guifg=#303030 guibg= #3a3a3a
