@@ -104,8 +104,8 @@ Plugin 'mhinz/vim-signify'
 " 代码对齐插件
 Plugin 'godlygeek/tabular'
 
-" markdown语法高亮
-Plugin 'plasticboy/vim-markdown'
+" markdown语法高亮 不给力 屏蔽
+"Plugin 'plasticboy/vim-markdown'
 
 " Search results counter
 Plugin 'IndexedSearch'
