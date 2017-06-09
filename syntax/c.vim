@@ -522,14 +522,14 @@ syn match       cLogicalOperatorError display "\(&&\|||\)="
 syn match       cpriorityperator  display "(\|)\|\[\|\]\|{\|}"
 
 " Math Operator 
-hi cMathOperator            ctermfg=3           guifg=#9AC0CD 
-hi cPointerOperator         ctermfg=3           guifg=#EEAEEE 
-hi cLogicalOperator         ctermfg=3           guifg=#CDCD00 
-hi cBinaryOperator          ctermfg=3           guifg=#BBFFFF 
-hi cBinaryOperatorError     ctermfg=3           guifg=#C0FF3E 
-hi cLogicalOperator         ctermfg=3           guifg=#C0FF3E 
-hi cLogicalOperatorError    ctermfg=3           guifg=#C0FF3E 
-hi cpriorityperator       ctermfg=165           guifg=#CDAD00
+hi cMathOperator            ctermfg=194           guifg=#dfffdf 
+hi cPointerOperator         ctermfg=213           guifg=#ff87ff 
+hi cLogicalOperator         ctermfg=184           guifg=#dfdf00 
+hi cBinaryOperator          ctermfg=184           guifg=#dfdf00 
+hi cBinaryOperatorError     ctermfg=184           guifg=#dfdf00 
+hi cLogicalOperator         ctermfg=184           guifg=#dfdf00 
+hi cLogicalOperatorError    ctermfg=184           guifg=#dfdf00 
+hi cpriorityperator       ctermfg=178           guifg=#dfaf00
 
 let b:current_syntax = "c"
 

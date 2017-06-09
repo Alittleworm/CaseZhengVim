@@ -15,8 +15,8 @@
   
   
   " == Normal color 正常文本==
-  hi Normal           guifg=#ffffff           guibg=#1c1c1c 
-  hi Normal           ctermfg=15             ctermbg=234
+  hi Normal           guifg=#eeeeee           guibg=#1c1c1c 
+  hi Normal           ctermfg=255             ctermbg=234
   
   
   " == Comments 注释==
@@ -112,24 +112,24 @@
   
   
   " == Special ==
-  " any special symbol
-  hi Special          guifg=#dfafdf                                   gui=none
-  hi Special          ctermfg=182                                     cterm=none
+  " any special symbol 所有特殊符号
+  hi Special          guifg=#ff5f00                                   gui=none
+  hi Special          ctermfg=202                                     cterm=none
   " special character in a constant
-  hi SpecialChar      guifg=#dfafdf                                   gui=none
-  hi SpecialChar      ctermfg=182                                     cterm=none
+  hi SpecialChar      guifg=#ff5f00                                 gui=none
+  hi SpecialChar      ctermfg=202                                   cterm=none
   " things you can CTRL-]
-  hi Tag              guifg=#dfafdf                                   gui=none
-  hi Tag              ctermfg=182                                     cterm=none
+  hi Tag              guifg=#ff5f00                             gui=none
+  hi Tag              ctermfg=202                             cterm=none
   " character that needs attention
-  hi Delimiter        guifg=#dfafdf                                   gui=none
-  hi Delimiter        ctermfg=182                                     cterm=none
+  hi Delimiter        guifg=#ff5f00                             gui=none
+  hi Delimiter        ctermfg=202                             cterm=none
   " special things inside a comment
-  hi SpecialComment   guifg=#dfafdf                                   gui=none
-  hi SpecialComment   ctermfg=182                                     cterm=none
+  hi SpecialComment   guifg=#ff5f00                             gui=none
+  hi SpecialComment   ctermfg=202                             cterm=none
   " debugging statements
-  hi Debug            guifg=#dfafdf                                   gui=none
-  hi Debug            ctermfg=182                                     cterm=none
+  hi Debug            guifg=#ff5f00                             gui=none
+  hi Debug            ctermfg=202                             cterm=none
   
   
   " == Text Markup 文本标记==
@@ -152,8 +152,8 @@
   hi SpecialKey       guifg=#c6c6c6
   hi SpecialKey       ctermfg=251
   " titles for output from :set all, :autocmd, etc 输出的命令
-  hi Title            guifg=#5fafdf                                   gui=none
-  hi Title            ctermfg=74                                      cterm=none
+  hi Title            guifg=#5fafdf                                   gui=bold
+  hi Title            ctermfg=74                                      cterm=bold
   
   
   " == Ignore ==
@@ -229,32 +229,32 @@
   
   
   " == Spelling ==
-  " word not recognized
-  hi SpellBad         guisp=#ee0000                                   gui=undercurl
+  " word not recognized 拼写错误
+  hi SpellBad         guisp=#ff0000                                   gui=undercurl
   hi SpellBad                                 ctermbg=196             cterm=undercurl
   " word not capitalized
-  hi SpellCap         guisp=#eeee00                                   gui=undercurl
+  hi SpellCap         guisp=#ffff00                                   gui=undercurl
   hi SpellCap                                 ctermbg=226             cterm=undercurl
   " rare word
-  hi SpellRare        guisp=#ffa500                                   gui=undercurl
+  hi SpellRare        guisp=#ffaf00                                   gui=undercurl
   hi SpellRare                                ctermbg=214             cterm=undercurl
   " wrong spelling for selected region
-  hi SpellLocal       guisp=#ffa500                                   gui=undercurl
+  hi SpellLocal       guisp=#ffaf00                                   gui=undercurl
   hi SpellLocal                               ctermbg=214             cterm=undercurl
   
   
   " == Diff ==
-  " added line
-  hi DiffAdd          guifg=#80a090           guibg=#313c36           gui=none
+  " added line 新加行
+  hi DiffAdd          guifg=fg           guibg=#005f00           gui=none
   hi DiffAdd          ctermfg=fg              ctermbg=22              cterm=none
-  " changed line
-  hi DiffChange       guifg=NONE              guibg=#4a343a           gui=none
+  " changed line 改变行
+  hi DiffChange       guifg=fg              guibg=#5f0000           gui=none
   hi DiffChange       ctermfg=fg              ctermbg=52              cterm=none
-  " deleted line
-  hi DiffDelete       guifg=#6c6661           guibg=#3c3631           gui=none
+  " deleted line 删除行
+  hi DiffDelete       guifg=fg           guibg=#5f5f00           gui=none
   hi DiffDelete       ctermfg=fg              ctermbg=58              cterm=none
-  " changed text within line
-  hi DiffText         guifg=#f05060           guibg=#4a343a           gui=bold
+  " changed text within line 行中更改文本
+  hi DiffText         guifg=#ff5f5f           guibg=#5f0000           gui=bold
   hi DiffText         ctermfg=203             ctermbg=52              cterm=bold
   
   
@@ -265,33 +265,30 @@
   " error messages on the command line 命令行上错误信息
   hi ErrorMsg         guifg=#ff0000           guibg=NONE              gui=none
   hi ErrorMsg         ctermfg=196             ctermbg=NONE            cterm=none
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""begin
-  " columns where signs are displayed (used in IDEs)
-  hi SignColumn       guifg=#9fafaf           guibg=#181818           gui=none
+  " columns where signs are displayed (used in IDEs) 纵向标志显示（用于ide）
+  hi SignColumn       guifg=#afafaf           guibg=#121212           gui=none
   hi SignColumn       ctermfg=145             ctermbg=233             cterm=none
-  " line numbers
-  hi LineNr           guifg=#818698           guibg=#363946
+  " line numbers 行号
+  hi LineNr           guifg=#8a8a8a           guibg=#3a3a3a
   hi LineNr           ctermfg=245             ctermbg=237
-  " the 'more' prompt when output takes more than one line
-  hi MoreMsg          guifg=#2e8b57                                   gui=none
+  " the 'more' prompt when output takes more than one line 当输出超过一行时，“更多”提示
+  hi MoreMsg          guifg=#00875f                                   gui=none
   hi MoreMsg          ctermfg=29                                      cterm=none
-  " text showing what mode you are in
-  hi ModeMsg          guifg=#76d5f8           guibg=NONE              gui=none
+  " text showing what mode you are in 显示当前模式的文字
+  hi ModeMsg          guifg=#87dfff           guibg=NONE              gui=none
   hi ModeMsg          ctermfg=117             ctermbg=NONE            cterm=none
-  " the hit-enter prompt (show more output) and yes/no questions
+  " the hit-enter prompt (show more output) and yes/no questions 命中输入提示符（显示更多输出）和Yes /否问题
   hi Question         guifg=fg                                        gui=none
   hi Question         ctermfg=fg                                      cterm=none
-  " warning messages
-  hi WarningMsg       guifg=#e5786d                                   gui=none
-  hi WarningMsg       ctermfg=173                                     cterm=none
+  " warning messages 警告信息
+  hi WarningMsg       guifg=#df5f5f                                   gui=none
+  hi WarningMsg       ctermfg=167                                     cterm=none
   " current match in the wildmenu completion
-  hi WildMenu         guifg=#cae682           guibg=#363946           gui=bold,underline
-  hi WildMenu         ctermfg=16              ctermbg=186             cterm=bold
-  " color column highlighting
-  hi ColorColumn      guifg=NONE              guibg=#403630           gui=none
+  hi WildMenu         guifg=#afffaf           guibg=#585858           gui=bold,underline
+  hi WildMenu         ctermfg=157              ctermbg=240             cterm=bold,underline
+  " color column highlighting 纵行高亮
+  hi ColorColumn      guifg=NONE              guibg=#875f5f           gui=none
   hi ColorColumn      ctermfg=NONE            ctermbg=95              cterm=none
-  
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""end
   
   " == Vimwiki Colors Vimwiki颜色==
   
