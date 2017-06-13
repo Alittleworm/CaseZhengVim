@@ -54,7 +54,7 @@ Plugin 'rking/ag.vim'
 "Plugin 'tpope/vim-fugitive'
 
 " 显示色彩对应的颜色
-Plugin 'lilydjwg/colorizer'
+"Plugin 'lilydjwg/colorizer'
 
 " tab管理
 Plugin 'kien/tabman.vim'
@@ -129,7 +129,7 @@ Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 
 " 显示终端的各种颜色对应的编号
-Plugin 'guns/xterm-color-table.vim'
+"Plugin 'guns/xterm-color-table.vim'
 
 " ============================================================================
 " 在安装Vundle后只运行一次
