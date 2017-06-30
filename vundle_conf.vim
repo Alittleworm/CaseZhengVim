@@ -303,7 +303,7 @@ nmap ,t :NERDTreeFind<CR>
 " 过滤文件和文件夹的显示
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.git$', '\.svn$', 'cscope.file', 'cscope.out', 'tag$', '\.sln$', '\.vcxproj$', '\.filters$', '\.vcxproj\.user$', '\.exe$']
 " 设置宽度
-let NERDTreeWinSize=25
+let NERDTreeWinSize=40
 " 排序
 let NERDTreeCaseSensitiveSort=1
 "let NERDTreeBookmarksFile=       "指定书签文件
@@ -351,13 +351,13 @@ function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     call feedkeys(a:search_text)
 endfunction
 " same as previous mappings, but calling with current word as default text
-nmap ,wpg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
-nmap ,wpG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
-nmap ,wpf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
-nmap ,wpe :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
-nmap ,wpaf :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-nmap ,wpm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
-nmap ,wpc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
+"nmap ,wpg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
+"nmap ,wpG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
+"nmap ,wpf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
+"nmap ,wpe :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
+"nmap ,wpaf :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
+"nmap ,wpm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
+"nmap ,wpc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 " don't change working directory
 let g:ctrlp_working_path_mode = 0
 " ignore these files and folders on file finder
@@ -488,13 +488,44 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#show_buffers = 1
 
 " 关闭状态显示空白符号计数
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
 
-"这个是安装字体后 必须设置此项" 
+" enable/disable displaying tab number in tabs mode.
+let g:airline#extensions#tabline#show_tab_nr = 1
+
+" configure how numbers are displayed in tab mode.
+"let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+"let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
+
+" rename label for buffers (default: 'buffers') (c)
+let g:airline#extensions#tabline#buffers_label = 'b'
+
+" 这个是安装字体后 必须设置此项" 
 let g:airline_powerline_fonts = 1
+
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+let g:airline#extensions#quickfix#location_text = 'Location'
+
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
+
+let airline#extensions#tabline#middle_click_preserves_windows = 1
+let airline#extensions#tabline#disable_refresh = 0
 
 if(g:iswindows)
     " 设置consolas字体
