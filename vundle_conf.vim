@@ -72,7 +72,11 @@ endif
 "让cpp文件在.h和.cpp文件中切换
 Bundle 'vim-scripts/a.vim'
 
-"Plugin 'klen/python-mode'
+" python插件
+Plugin 'klen/python-mode'
+
+" 语法部分高亮插件
+Plugin 'junegunn/limelight.vim'
 
 "自动补全
 "if(g:iswindows==1)
@@ -412,22 +416,76 @@ endif
 "let g:syntastic_enable_balloons = 1 "whether to show balloons
 
 
-" Python-mode ------------------------------
-" don't use linter, we use syntastic for that
-"let g:pymode_lint_on_write = 0
-"let g:pymode_lint_signs = 0
-" don't fold python code on open
-"let g:pymode_folding = 0
-" don't load rope by default. Change to 1 to use rope
-"let g:pymode_rope = 0
-" open definitions on same window, and custom mappings for definitions and
-" occurrences
-"let g:pymode_rope_goto_definition_bind = ',d'
-"let g:pymode_rope_goto_definition_cmd = 'e'
-"nmap ,D :tab split<CR>:PymodePython rope.goto()<CR>
-"nmap ,o :RopeFindOccurrences<CR>
+"------------------------------------- pymode ------------------------------
+" Python-mode
+" Activate rope
+" Keys: 按键：
+" K             Show python docs 显示Python文档
+" <Ctrl-Space>  Rope autocomplete  使用Rope进行自动补全
+" <Ctrl-c>g     Rope goto definition  跳转到定义处
+" <Ctrl-c>d     Rope show documentation  显示文档
+" <Ctrl-c>f     Rope find occurrences  寻找该对象出现的地方
+" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled) 断点
+" [[            Jump on previous class or function (normal, visual, operator modes)
+" ]]            Jump on next class or function (normal, visual, operator modes)
+"            跳转到前一个/后一个类或函数
+" [M            Jump on previous class or method (normal, visual, operator modes)
+" ]M            Jump on next class or method (normal, visual, operator modes)
+"              跳转到前一个/后一个类或方法
+let g:pymode_rope = 0
 
+" Documentation 显示文档
+let g:pymode_doc = 1
+let g:pymode_doc_key = '<leader>k'
 
+" Linting 代码查错，=1为启用
+let g:pymode_lint = 0
+let g:pymode_lint_checker = 'pyflakes,pep8'
+" Auto check on save
+let g:pymode_lint_write = 0 " 0为关闭
+
+" Support virtualenv
+let g:pymode_virtualenv = 0
+
+" Enable breakpoints plugin
+let g:pymode_breakpoint = 0 " 0为关闭
+let g:pymode_breakpoint_bind = '<leader>b'
+
+" syntax highlighting 高亮形式
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+" Don't autofold code 禁用自动代码折叠
+let g:pymode_folding = 0
+"------------------------------------- pymode ------------------------------
+
+"------------------------------------- limelight ------------------------------
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+" Default: 0.5
+let g:limelight_default_coefficient = 0.7
+
+" Number of preceding/following paragraphs to include (default: 0)
+let g:limelight_paragraph_span = 1
+
+" Beginning/end of paragraph
+"   When there's no empty line between the paragraphs
+"   and each paragraph starts with indentation
+let g:limelight_bop = '^\s'
+let g:limelight_eop = '\ze\n^\s'
+
+" Highlighting priority (default: 10)
+"   Set it to -1 not to overrule hlsearch
+let g:limelight_priority = -1
+"------------------------------------- limelight ------------------------------
 
 "------------------------------------- TabMan ------------------------------
 " mappings to toggle display, and to focus on it
@@ -777,9 +835,9 @@ function Do_CsTag()
     endif
     if(executable('cscope') && has("cscope") )
         if(g:iswindows!=1)
-              silent! execute "!find . -name '*.h' -name '*.hpp' -o -name '*.c' -o -name '*.cpp' -o -name '*.lua' -o -name '*.cs' > cscope.files"
+              silent! execute "!find . -name '*.h' -name '*.hpp' -o -name '*.c' -o -name '*.cpp' -o -name '*.lua' -o -name '*.cs' -name '*.py' > cscope.files"
           else
-              silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hpp,*.lua,*.cs >> cscope.files"
+              silent! execute "!dir /s/b *.c,*.cpp,*.h,*.hpp,*.lua,*.cs,*.py >> cscope.files"
         endif
         silent! execute "!cscope -b"
         execute "normal :"

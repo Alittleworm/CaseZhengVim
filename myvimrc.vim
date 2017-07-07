@@ -144,7 +144,7 @@ if version > 580
 endif 
 
 " show line numbers
-set nu                      " 显示行号
+" set nu                      " 显示行号
 set rnu                     " 显示别的行距当前行的行数
 
 "打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
