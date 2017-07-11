@@ -56,9 +56,6 @@ Plugin 'rking/ag.vim'
 " 显示色彩对应的颜色
 "Plugin 'lilydjwg/colorizer'
 
-" tab管理
-Plugin 'kien/tabman.vim'
-
 " 窗口管理器
 Plugin 't9md/vim-choosewin'
 
@@ -89,14 +86,13 @@ Plugin 'junegunn/limelight.vim'
 "endif
 
 " snipMate 依赖组件
-Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
 " snipMate 依赖组件
-Plugin 'tomtom/tlib_vim'
+"Plugin 'tomtom/tlib_vim'
 " 使 Vim 具有 TextMate 风格的 snippets 功能
-Plugin 'garbas/vim-snipmate'
-
+"Plugin 'garbas/vim-snipmate'
 " 代码片段补全 
-Plugin 'honza/vim-snippets'
+"Plugin 'honza/vim-snippets'
 
 " 同时支持Git 和 Svn ，速度也是相当不错的，高亮当前修改.　比较全面的一个插件
 Plugin 'mhinz/vim-signify'
@@ -109,27 +105,25 @@ Plugin 'mhinz/vim-signify'
 "endif
 
 " 代码对齐插件
-Plugin 'godlygeek/tabular'
+"Plugin 'godlygeek/tabular'
 
 " markdown语法高亮 不给力 屏蔽
 "Plugin 'plasticboy/vim-markdown'
 
-" Search results counter
-Plugin 'IndexedSearch'
+" 查找工具
+"Plugin 'IndexedSearch'
 
 " Lua代码高亮补全
 Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'xolox/vim-misc'
 
 " Grep
-Plugin 'yegappan/grep'
+"Plugin 'yegappan/grep'
 
-" 代码对齐展示
+" 代码垂直缩进对齐线插件
 Plugin 'nathanaelkane/vim-indent-guides'
 
 " 配色方案
-Plugin 'Wombat'
-Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 
 " 显示终端的各种颜色对应的编号
@@ -354,14 +348,6 @@ function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     execute ':CtrlP' . a:ctrlp_command_end
     call feedkeys(a:search_text)
 endfunction
-" same as previous mappings, but calling with current word as default text
-"nmap ,wpg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
-"nmap ,wpG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
-"nmap ,wpf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
-"nmap ,wpe :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
-"nmap ,wpaf :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-"nmap ,wpm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
-"nmap ,wpc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 " don't change working directory
 let g:ctrlp_working_path_mode = 0
 " ignore these files and folders on file finder
@@ -442,14 +428,14 @@ let g:pymode_doc_key = '<leader>k'
 let g:pymode_lint = 0
 let g:pymode_lint_checker = 'pyflakes,pep8'
 " Auto check on save
-let g:pymode_lint_write = 0 " 0为关闭
+let g:pymode_lint_write = 1 " 0为关闭
 
 " Support virtualenv
-let g:pymode_virtualenv = 0
+let g:pymode_virtualenv = 1
 
 " Enable breakpoints plugin
 let g:pymode_breakpoint = 0 " 0为关闭
-let g:pymode_breakpoint_bind = '<leader>b'
+"let g:pymode_breakpoint_bind = '<leader>b'
 
 " syntax highlighting 高亮形式
 let g:pymode_syntax = 1
@@ -486,15 +472,6 @@ let g:limelight_eop = '\ze\n^\s'
 "   Set it to -1 not to overrule hlsearch
 let g:limelight_priority = -1
 "------------------------------------- limelight ------------------------------
-
-"------------------------------------- TabMan ------------------------------
-" mappings to toggle display, and to focus on it
-" 开启/关闭 tab 管理
-let g:tabman_toggle = 'tl'
-" 将光标移动到tab管理窗口
-let g:tabman_focus  = 'tf'
-"------------------------------------- TabMan ------------------------------
-
 
 "------------------------------------ Signify ------------------------------
 " this first setting decides in which order try to guess your current vcs
@@ -600,17 +577,7 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
-
-"let g:airline_left_sep = ''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_right_alt_sep = ''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = ''
-"let g:airline_symbols.linenr = ''
 "------------------------------------ Airline ------------------------------
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""cscope""""""""""""""""""""""""""""""""""""""""""""""""
 "cscope插件：查询符号的调用和定义位置等，已经集成到vim里面，这里只是映射快捷键"<C-_>g的按法是先按
@@ -624,17 +591,8 @@ nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 "查找本 egrep 模式
 nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-"查找本文件
-nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-"查找包含本文件的文件
-nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 "查找本函数调用的函数
 nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-"在Vim命令行下运行cw命令，就能在编辑区下面quickfix窗口看到所有查找结果的列表
-"cn<cr> "切换到下一个结果
-"cp<cr> "切换到上一个结果
-"设定使用 quickfix 窗口来显示 cscope 的查询结果  
-""set cscopequickfix=s-,c-,d-,i-,t-,e-   
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -748,9 +706,9 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
@@ -849,7 +807,7 @@ function Do_CsTag()
 endfunction
 
 " 新建文件自动插入头部
-autocmd BufNewFile *.sh,*.py,*.rb,*.md exec ":call SetTitle()"
+"autocmd BufNewFile *.sh,*.py,*.rb,*.md exec ":call SetTitle()"
 function SetTitle()
     if &filetype == 'sh'
         call setline(1,"\#!/bin/bash")
