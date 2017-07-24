@@ -445,6 +445,8 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " Don't autofold code 禁用自动代码折叠
 let g:pymode_folding = 0
+
+let g:pymode_options_max_line_length = 200
 "------------------------------------- pymode ------------------------------
 
 "------------------------------------- limelight ------------------------------

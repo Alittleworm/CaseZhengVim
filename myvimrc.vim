@@ -104,7 +104,7 @@ set fillchars=vert:\ ,stl:\ ,stlnc:\
 " 匹配括号高亮的时间（单位是十分之一秒）
 set matchtime=1
 " 光标移动到buffer的顶部和底部时保持3行距
-set scrolloff=3
+set scrolloff=2
 
 " 用浅色高亮当前行  
 "autocmd InsertLeave * se nocul
@@ -144,7 +144,7 @@ if version > 580
 endif 
 
 " show line numbers
-" set nu                      " 显示行号
+set nu                      " 显示行号
 set rnu                     " 显示别的行距当前行的行数
 
 "打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
