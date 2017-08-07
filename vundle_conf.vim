@@ -123,6 +123,9 @@ Plugin 'xolox/vim-misc'
 " 代码垂直缩进对齐线插件
 Plugin 'nathanaelkane/vim-indent-guides'
 
+" HTML快速书写工具
+Plugin 'mattn/emmet-vim'
+
 " 配色方案
 Plugin 'altercation/vim-colors-solarized'
 
@@ -851,6 +854,24 @@ map <F10> :call Do_CsTag()<CR><CR>
 " t 设置后将在按空格 <space> 或鼠标右击 <RightMouse> 时候进行原窗口和加宽窗口之间的切换。
 let g:proj_flags="icmStg"
 "-------------------------------------- project ------------------------------
+
+"-------------------------------------- emmet ------------------------------
+let g:user_emmet_settings = {
+    \ 'php' : {
+    \ 'extends' : 'html',
+    \ 'filters' : 'c',
+    \ },
+    \ 'xml' : {
+    \ 'extends' : 'html',
+    \ },
+    \ 'haml' : {
+    \ 'extends' : 'html',
+    \ },
+    \}
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,markdown EmmetInstall
+"-------------------------------------- emmet ------------------------------
+
 
 filetype  on
 
